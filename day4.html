@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Learning Chatbot</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f7fa;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background: #4a90e2;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    main {
+      padding: 20px;
+    }
+    .chatbox {
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 10px;
+      background: #fff;
+      max-width: 500px;
+      margin: auto;
+    }
+    .messages {
+      min-height: 150px;
+      padding: 10px;
+      border-bottom: 1px solid #eee;
+      font-size: 14px;
+    }
+    .user-input {
+      display: flex;
+      margin-top: 10px;
+    }
+    .user-input input {
+      flex: 1;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    .user-input button {
+      padding: 8px 12px;
+      margin-left: 5px;
+      border: none;
+      border-radius: 4px;
+      background: #4a90e2;
+      color: white;
+      cursor: pointer;
+    }
+    .user-input button:hover {
+      background: #357ABD;
+    }
+    footer {
+      text-align: center;
+      font-size: 13px;
+      padding: 10px;
+      margin-top: 20px;
+      background: #f1f1f1;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>AI Learning Chatbot (Demo)</h1>
+    <p>A simple demo page using HTML, CSS, and JS</p>
+  </header>
+
+  <main>
+    <section class="chatbox">
+      <div class="messages" id="messages">
+        <p><em>Chatbot ready! Click send to see a demo reply.</em></p>
+      </div>
+      <div class="user-input">
+        <input type="text" id="userInput" placeholder="Type something...">
+        <button onclick="sendMessage()">Send</button>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    function sendMessage() {
+      const input = document.getElementById("userInput");
+      const messages = document.getElementById("messages");
+
+      if (input.value.trim() === "") return;
+
+      // Display user message
+      const userMsg = document.createElement("p");
+      userMsg.innerHTML = "<strong>You:</strong> " + input.value;
+      messages.appendChild(userMsg);
+
+      // Display chatbot reply
+      const botMsg = document.createElement("p");
+      botMsg.innerHTML = "<strong>Bot:</strong> This is a demo reply!";
+      messages.appendChild(botMsg);
+
+      input.value = "";
+      messages.scrollTop = messages.scrollHeight;
+    }
+  </script>
+</body>
+</html>
