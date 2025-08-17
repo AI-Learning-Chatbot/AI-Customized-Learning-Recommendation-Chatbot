@@ -90,12 +90,10 @@
 
       if (input.value.trim() === "") return;
 
-      // Display user message
       const userMsg = document.createElement("p");
       userMsg.innerHTML = "<strong>You:</strong> " + input.value;
       messages.appendChild(userMsg);
 
-      // Display chatbot reply
       const botMsg = document.createElement("p");
       botMsg.innerHTML = "<strong>Bot:</strong> This is a demo reply!";
       messages.appendChild(botMsg);
