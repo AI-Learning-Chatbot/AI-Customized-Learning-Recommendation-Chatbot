@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>LearnBot Demo</title>
+    <style>
+        body { font-family: Arial; max-width: 600px; margin: auto; padding: 20px; }
+        .quiz { margin: 20px 0; }
+        button { padding: 8px 15px; background: #4CAF50; color: white; border: none; }
+    </style>
+</head>
+<body>
+    <h1>AI Tutor Chatbot (Demo)</h1>
+    <div class="quiz">
+        <p id="question">Loading question...</p>
+        <div id="options"></div>
+        <button onclick="submitAnswer()">Submit</button>
+    </div>
+    <p id="feedback"></p>
+
+    <script>
+        // Mock interaction 
+        fetch('/get_quiz', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ level: 'beginner' })
+        })
+        .then(res => res.json())
+        .then(data => {
+            document.getElementById('question').textContent = data[0].question;
+            const optionsDiv = document.getElementById('options');
+            data[0].options.forEach((opt, idx) => {
+                optionsDiv.innerHTML += `<input type="radio" name="quiz" value="${idx}"> ${opt}<br>`;
+            });
+        });
+
+        function submitAnswer() {
+            const selected = document.querySelector('input[name="quiz"]:checked');
+            if (!selected) return;
+            
+            fetch('/submit', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ 
+                    answer: parseInt(selected.value), 
+                    question_idx: 0,
+                    level: 'beginner'
+                })
+            })
+            .then(res => res.json())
+            .then(data => {
+                document.getElementById('feedback').textContent = data.feedback;
+            });
+        }
+    </script>
+</body>
+</html>
