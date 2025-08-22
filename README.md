@@ -29,16 +29,16 @@ Prerequisites:
 
 Installation:
 1. Clone the repository:
-`git clone https://github.com/AI-Learning-Chatbot/AI-Customized-Learning-Recommendation-Chatbot.git`
+    `git clone https://github.com/AI-Learning-Chatbot/AI-Customized-Learning-Recommendation-Chatbot.git`
 
 2. Set up a Virtual Enviroment and activate it:
-`python -m venv env`
-`env/scripts/activate`
+    `python -m venv env`
+    `env/scripts/activate`
 
 3. Install the required libraries:
-`pip install -r requirements.txt`
+    `pip install -r requirements.txt`
 
 4. Configure your Gemini API KEY:
-- Create a .env file in the root directory.
-- Add your Google API key in the following format:
-`GOOGLE_API_KEY=YOUR_API_KEY_HERE`
+    - Create a .env file in the root directory.
+    - Add your Google API key in the following format:
+    `GOOGLE_API_KEY=YOUR_API_KEY_HERE`
