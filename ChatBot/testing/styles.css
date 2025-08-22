@@ -1,0 +1,435 @@
+/*
+ * General Styles
+ * These styles apply to the entire website for a consistent look.
+ */
+body {
+    background-color: #2c2f33;
+    color: #ffffff;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.container {
+    width: 100%;
+    max-width: 800px;
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-grow: 1;
+}
+
+/*
+ * Header and Logo Styles
+ * Used on every page.
+ */
+.header {
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+    margin-bottom: 20px;
+    align-self: flex-start;
+    width: 100%;
+}
+
+.logo-container {
+    background-color: #5865f2;
+    border-radius: 5px;
+    padding: 5px 10px;
+    margin-right: 10px;
+}
+
+.logo-text {
+    font-weight: bold;
+    font-size: 1.5em;
+}
+
+.title {
+    font-size: 2em;
+    font-weight: bold;
+    color: #99aab5;
+}
+
+/*
+ * Input and Button Styles
+ * Used on "Take Quizz" and "LearnAI" pages.
+ */
+.input-container {
+    width: 100%;
+    margin-top: auto;
+    padding: 20px 0;
+}
+
+.input-wrapper {
+    display: flex;
+    align-items: center;
+    background-color: #36393f;
+    border-radius: 25px;
+    padding: 10px 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.mic-icon, .send-icon {
+    font-size: 1.5em;
+    color: #99aab5;
+    cursor: pointer;
+}
+
+.input-field {
+    flex-grow: 1;
+    background: none;
+    border: none;
+    outline: none;
+    color: #ffffff;
+    font-size: 1em;
+    padding: 0 10px;
+}
+
+.input-field::placeholder {
+    color: #72767d;
+}
+
+.send-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+/*
+ * Chat Page Specific Styles (from "Take Quizz")
+ */
+.chat-container {
+    flex-grow: 1;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    overflow-y: auto;
+}
+
+.message {
+    padding: 15px;
+    border-radius: 20px;
+    max-width: 80%;
+    line-height: 1.5;
+}
+
+.ai-message {
+    background-color: #4a4d52;
+    align-self: flex-start;
+    border-top-left-radius: 5px;
+}
+
+.user-message {
+    background-color: #5865f2;
+    align-self: flex-end;
+    border-top-right-radius: 5px;
+}
+
+/*
+ * LearnAI Page Specific Styles
+ */
+.content {
+    flex-grow: 1;
+    width: 100%;
+}
+
+.hero {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.welcome-message {
+    font-size: 2em;
+    font-weight: bold;
+    line-height: 1.2;
+    color: #ffffff;
+}
+
+.suggestions {
+    margin-top: 40px;
+    text-align: center;
+}
+
+.suggestions-title {
+    font-size: 1.2em;
+    color: #99aab5;
+    margin-bottom: 20px;
+}
+
+.topics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
+    justify-content: center;
+}
+
+.topic-card {
+    background-color: #36393f;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: bold;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+}
+
+.topic-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/*
+ * Feedback Page Specific Styles
+ */
+.feedback-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-grow: 1;
+    justify-content: space-between;
+    padding: 20px;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.score-box {
+    background-color: #4CAF50;
+    color: #ffffff;
+    padding: 15px 25px;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 600px;
+}
+
+.feedback-box {
+    background-color: #36393f;
+    color: #dcddde;
+    padding: 30px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    width: 100%;
+    max-width: 600px;
+    box-sizing: border-box;
+}
+
+.feedback-box h2, .feedback-box h3 {
+    margin-top: 0;
+    color: #ffffff;
+}
+
+.feedback-box p {
+    font-size: 1em;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.how-to-correct,
+.resources {
+    font-size: 1.1em;
+    font-weight: bold;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.feedback-box ul {
+    padding-left: 20px;
+    margin: 0;
+    list-style-type: disc;
+}
+
+.feedback-box li {
+    margin-bottom: 8px;
+    line-height: 1.4;
+}
+
+.topic-specific-question {
+    margin-top: 25px;
+    font-style: italic;
+    color: #a0a0a0;
+}
+
+.feedback-navigation {
+    display: flex;
+    justify-content: center;
+    gap: 150px;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.nav-button {
+    background: none;
+    border: none;
+    color: #5865f2;
+    font-size: 1.1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.nav-button:hover {
+    color: #ffffff;
+}
+
+/*
+ * AI Topic Understanding Page Specific Styles
+ */
+.topic-understanding-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    max-width: 600px;
+    padding: 20px;
+    background-color: #36393f;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.topic-understanding-title {
+    font-size: 2em;
+    font-weight: bold;
+    line-height: 1.2;
+    margin-bottom: 30px;
+    color: #ffffff;
+}
+
+.understanding-options {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+}
+
+.understanding-button {
+    background-color: #4a4d52;
+    color: #ffffff;
+    border: none;
+    padding: 15px;
+    font-size: 1.1em;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    width: 100%;
+}
+
+.understanding-button:hover {
+    background-color: #5865f2;
+}
+
+.proceed-button {
+    background-color: #5865f2;
+    color: #ffffff;
+    border: none;
+    padding: 15px 30px;
+    font-size: 1.1em;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 30px;
+    transition: background-color 0.2s;
+}
+
+.proceed-button:hover {
+    background-color: #4752c4;
+}
+
+/*
+ * AI Quiz Page Specific Styles
+ */
+.quiz-container {
+    background-color: #36393f;
+    border-radius: 10px;
+    padding: 30px;
+    text-align: center;
+    max-width: 600px;
+    width: 100%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.quiz-question {
+    color: #99aab5;
+    font-size: 1.5em;
+    font-weight: bold;
+    margin: 0 0 30px 0;
+}
+
+.quiz-options {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    text-align: left;
+    margin-bottom: 30px;
+}
+
+.quiz-option {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-size: 1em;
+    cursor: pointer;
+    position: relative;
+}
+
+.quiz-option input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.custom-radio {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #5865f2;
+    border-radius: 50%;
+    display: inline-block;
+    position: relative;
+}
+
+.custom-radio::after {
+    content: '';
+    width: 10px;
+    height: 10px;
+    background-color: #5865f2;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    transition: transform 0.2s;
+}
+
+.quiz-option input[type="radio"]:checked ~ .custom-radio::after {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.check-button {
+    background-color: #5865f2;
+    color: #ffffff;
+    border: none;
+    padding: 12px 25px;
+    font-size: 1.1em;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.check-button:hover {
+    background-color: #4752c4;
+}

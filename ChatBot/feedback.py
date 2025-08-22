@@ -27,7 +27,7 @@ feedback_prompt=ChatPromptTemplate([
 feedback_chain=(feedback_prompt
                 |feedback_structured_llm)
 
-def feeback_chat(score, topic, level):
+def feedback_chat(score, topic, level):
     return feedback_chain.invoke({
     "score": score,
     "topic": topic,
