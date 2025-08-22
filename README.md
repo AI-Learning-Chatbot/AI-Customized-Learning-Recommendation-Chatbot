@@ -23,16 +23,17 @@ The chatbot leverages Large Language Models (LLMs) to dynamically generate conte
 - LLM Provider: Google Gemini or Groq
 
 ## 📋 Getting Started
-Prerequisites:
+<u>Prerequisites:</u>
 - Python 3.9+
 - A valid API key for either Google Gemini or Groq.
 
-Installation:
+<u>Installation:</u>
 1. Clone the repository:
     `git clone https://github.com/AI-Learning-Chatbot/AI-Customized-Learning-Recommendation-Chatbot.git`
 
 2. Set up a Virtual Enviroment and activate it:
-    `python -m venv env`
+    ```python
+    python -m venv env```
     `env/scripts/activate`
 
 3. Install the required libraries:
