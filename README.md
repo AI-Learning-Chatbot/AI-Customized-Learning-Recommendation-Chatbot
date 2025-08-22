@@ -34,9 +34,10 @@ The chatbot leverages Large Language Models (LLMs) to dynamically generate conte
 2. Set up a Virtual Enviroment and activate it:
     ```
     python -m venv env
-
+    ```
     ```
     env/scripts/activate
+    ```
 
 3. Install the required libraries:
     `pip install -r requirements.txt`
