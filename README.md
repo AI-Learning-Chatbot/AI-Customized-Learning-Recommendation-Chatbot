@@ -32,11 +32,9 @@ The chatbot leverages Large Language Models (LLMs) to dynamically generate conte
     `git clone https://github.com/AI-Learning-Chatbot/AI-Customized-Learning-Recommendation-Chatbot.git`
 
 2. Set up a Virtual Enviroment and activate it:
-    ```python
-    python -m venv env
-    
-    ```python
-    env/scripts/activate
+    ```python -m venv env
+
+    ```env/scripts/activate
 
 3. Install the required libraries:
     `pip install -r requirements.txt`
