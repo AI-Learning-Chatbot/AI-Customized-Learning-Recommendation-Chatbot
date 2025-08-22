@@ -29,7 +29,7 @@ The chatbot leverages Large Language Models (LLMs) to dynamically generate conte
 
 <u>Installation:</u>
 1. Clone the repository:
-    `git clone https://github.com/AI-Learning-Chatbot/AI-Customized-Learning-Recommendation-Chatbot.git`
+    ```git clone https://github.com/AI-Learning-Chatbot/AI-Customized-Learning-Recommendation-Chatbot.git```
 
 2. Set up a Virtual Enviroment and activate it:
     ```
@@ -40,9 +40,9 @@ The chatbot leverages Large Language Models (LLMs) to dynamically generate conte
     ```
 
 3. Install the required libraries:
-    `pip install -r requirements.txt`
+    ```pip install -r requirements.txt```
 
 4. Configure your Gemini API KEY:
     - Create a .env file in the root directory.
     - Add your Google API key in the following format:
-    `GOOGLE_API_KEY=YOUR_API_KEY_HERE`
+    ```GOOGLE_API_KEY=YOUR_API_KEY_HERE```
