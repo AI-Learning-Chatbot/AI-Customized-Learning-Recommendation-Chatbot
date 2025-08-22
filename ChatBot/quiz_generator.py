@@ -57,3 +57,11 @@ quiz_structured_llm=llm.with_structured_output(QuizOutput)
 
 quiz_chain=(quiz_prompt
             |quiz_structured_llm)
+
+
+def quiz_generator_chat(no_ques, topic, level):
+    return quiz_chain.invoke({
+    "number_of_questions": no_ques,
+    "topic": topic,
+    "level": level
+})

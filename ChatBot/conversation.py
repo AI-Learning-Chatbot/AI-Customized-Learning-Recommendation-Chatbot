@@ -121,3 +121,7 @@ conversation_memory_chain=RunnableWithMessageHistory(
     ]
 
 )
+
+def converstaion_chat(topic, level, query, session_id, k):
+     return conversation_memory_chain.invoke({"topic":topic, "level":level, "query":query},
+                                 config={"configurable":{"session_id":session_id, "llm":llm, "k":k}})

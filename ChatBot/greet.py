@@ -31,3 +31,7 @@ greeting_structured_llm=llm.with_structured_output(UserLearningContext)
 
 greeting_chain=(greeting_prompt
                 |greeting_structured_llm)
+
+
+def greet_chat():
+    return greeting_chain.invoke("I want to learn javascript functions and have a basic knowledge on it")
