@@ -112,11 +112,13 @@ body {
   color: #72767d;
 }
 
-.main {
+.content {
   width: 100%;
   display: flex;
   justify-content: center;
-  margin-top: 40px;
+  align-items: center;
+  margin-top: 10%;
+  flex-direction: column;
 }
 
 .chat-container {
@@ -144,4 +146,53 @@ body {
   background-color: #5865f2;
   align-self: flex-end;
   border-top-right-radius: 5px;
+}
+
+.hero {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.welcome-msg {
+  font-size: 2em;
+  font-weight: bold;
+  line-height: 1.2;
+  color: white;
+}
+
+.suggestion {
+  text-align: center;
+}
+
+.suggestion-title {
+  font-size: 1.2rem;
+  color: #99aab5;
+  margin-bottom: 20px;
+}
+
+.topics {
+  display: flex;
+  max-width: 600px;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: center;
+  flex-grow: 1;
+}
+
+.topic-card {
+  background-color: #36393f;
+  min-width: 100px;
+  max-width: 200px;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  font-weight: bold;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+}
+
+.topic-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }/*# sourceMappingURL=style.css.map */

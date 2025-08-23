@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block head %}
-<title>Index</title>
+<title>Chatbot</title>
 {% endblock %}
 
 {% block header %}
@@ -15,21 +15,14 @@
 
 {% block main %}
             {% if user_response %}
-            <section class="hero">
-                <h2 class="welcome-msg">Welcome to LearnAI -Your AI tutor for smarter,
-                    <br>faster learning.
-                </h2>
-            </section>
-            <section class="suggestion">
-                <h3 class="suggestion-title">Your may Explore</h3>
-                <div class="topics">
-                    <div class="topic-card">Topic 1</div>
-                    <div class="topic-card">Topic 2</div>
-                    <div class="topic-card">Topic 3</div>
-                    <div class="topic-card">Topic 4</div>
-                    <div class="topic-card">Topic 5</div>
+            <div class="chat-container">
+                <div class="messages ai-response">
+                    {{ai_response}}
                 </div>
-            </section>
+                <div class="messages user-response">
+                    {{user_response}}
+                </div>
+            </div>
             {% endif %}
 {% endblock %}
 
