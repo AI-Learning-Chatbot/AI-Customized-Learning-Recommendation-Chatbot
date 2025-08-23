@@ -39,6 +39,8 @@ The chatbot leverages Large Language Models (LLMs) to dynamically generate conte
     ```
     ```
     env/scripts/activate
+    #for linux
+    source venv/bin/activate
     ```
 
 3. Install the required libraries:

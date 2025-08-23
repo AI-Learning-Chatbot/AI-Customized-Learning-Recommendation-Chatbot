@@ -4,5 +4,35 @@
 <title>Chatbot</title>
 {% endblock %}
 
-{% block body %}
+{% block header %}
+            <div class="logo-container">
+                <span class="logo">AI</span>
+            </div>
+            <h1 class="take_quiz">
+                <a href="#">Quizz</a>
+            </h1>
+{% endblock %}
+
+{% block main %}
+            {% if user_response %}
+            <div class="chat-container">
+                <div class="messages ai-response">
+                    {{ai_response}}
+                </div>
+                <div class="messages user-response">
+                    {{user_response}}
+                </div>
+            </div>
+            {% endif %}
+{% endblock %}
+
+{% block footer %}
+            <div class="input-wrapper">
+                <form class="input-form" action="/" method="POST">
+                    <input type="text" class="input-field" name="input-field" id="input-field" placeholder="Ask Anything"/>
+                    <button class="input-btn">
+                        <span class="input-btn-icon">➡️</span>
+                    </button>
+                </form>
+            </div>
 {% endblock %}

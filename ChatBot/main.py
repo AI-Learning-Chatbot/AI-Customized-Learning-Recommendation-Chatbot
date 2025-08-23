@@ -8,9 +8,15 @@ from feedback import feedback_chat
 app=Flask(__name__)
 Scss(app)
 
-@app.route('/')
+@app.route('/', methods=["GET", "POST"])
 def index():
-    return render_template("index.html")
+    if request.method=="POST":
+        user_response=request.form['input-field']
+        ai_response=converstaion_chat(topic="python Function", level="expert", query=user_response, session_id="idx", k=2)
+        return render_template("index.html", user_response=user_response, ai_response=ai_response)
+    
+    else:
+        return render_template("index.html")
     
 
 if __name__ =="__main__":

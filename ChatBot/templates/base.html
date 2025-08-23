@@ -8,7 +8,23 @@
     {% endblock %}
 </head>
 <body>
-    {% block body %}
-    {% endblock %}
+    <div class="container">
+        
+        <header class="header">
+            {% block header %}
+            {% endblock %}
+        </header>
+        
+
+        <main class="main">
+            {% block main %}
+            {% endblock %}
+        </main>
+
+        <footer class="input-container">
+            {% block footer %}
+            {% endblock %}
+        </footer>
+    </div>
 </body>
 </html>

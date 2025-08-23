@@ -1,3 +1,147 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
-  background-color: black;
+  background-color: rgb(43, 44, 51);
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+  display: flex;
+  min-height: 100vh;
+  justify-content: center;
+}
+
+.container {
+  width: 100vw;
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.header {
+  display: flex;
+  padding: 10px 0;
+  margin-left: 10px;
+  margin-bottom: 20px;
+  align-self: flex-start;
+  width: 100%;
+  align-items: center;
+  position: fixed;
+}
+
+.logo-container {
+  background-color: plum;
+  border-radius: 5px;
+  padding: 5px 10px;
+  margin-right: 10px;
+}
+
+.logo {
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+.take_quiz a {
+  outline: none;
+  font-weight: bold;
+  font-size: 1.5rem;
+  color: #99aab5;
+  text-decoration: none;
+  transition: 0.3s ease-in;
+}
+
+.take_quiz a:hover {
+  outline: none;
+  text-decoration: underline;
+  color: red;
+}
+
+.input-container {
+  width: 100%;
+  margin-top: auto;
+  padding: 20px 0;
+  display: flex;
+  justify-content: center;
+  position: sticky;
+  bottom: 0;
+}
+
+.input-wrapper {
+  width: 60%;
+  display: flex;
+  align-items: center;
+  background-color: #36393f;
+  border-radius: 25px;
+  padding: 15px 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.input-form {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.input-field {
+  flex-grow: 1;
+  background: none;
+  border: none;
+  outline: none;
+  color: rgb(255, 255, 255);
+  font-size: 1em;
+  padding: 0 10px;
+}
+
+.input-btn {
+  background: none;
+  outline: none;
+  border: none;
+  font-size: 1.5em;
+  cursor: pointer;
+  padding: 0;
+}
+
+.input-field::-moz-placeholder {
+  color: #72767d;
+}
+
+.input-field::placeholder {
+  color: #72767d;
+}
+
+.main {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.chat-container {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  overflow-y: auto;
+}
+
+.messages {
+  max-width: 90%;
+  padding: 10px 15px;
+  border-radius: 20px;
+  line-height: 1.5;
+}
+
+.ai-response {
+  background-color: #4a4d52;
+  align-self: flex-start;
+  border-top-left-radius: 5px;
+}
+
+.user-response {
+  background-color: #5865f2;
+  align-self: flex-end;
+  border-top-right-radius: 5px;
 }/*# sourceMappingURL=style.css.map */

@@ -20,7 +20,7 @@ class SummaryBufferHistory(BaseChatMessageHistory, BaseModel):
         old_messages:list[BaseMessage]|None=None
 
         if len(self.messages)>0 and isinstance(self.messages[0], SystemMessage):
-            existing_summary=self.messages.pop(0)
+            old_summary=self.messages.pop(0)
 
         self.messages.extend(messages)
 
@@ -43,11 +43,11 @@ class SummaryBufferHistory(BaseChatMessageHistory, BaseModel):
             
             summary_prompt=ChatPromptTemplate([
                 summary_system,
-                ("user", "Existing summary:{existing_summary}\nNew messages:{new_messages}\nProvide the updated summary:")
+                ("user", "Existing summary:{old_summary}\nNew messages:{new_messages}\nProvide the updated summary:")
             ])
 
             new_summary=self.llm.invoke(summary_prompt.format_messages(
-                existing_summary=old_summary,
+                old_summary=old_summary,
                 new_messages=old_messages
             ))
 
@@ -123,5 +123,6 @@ conversation_memory_chain=RunnableWithMessageHistory(
 )
 
 def converstaion_chat(topic, level, query, session_id, k):
-     return conversation_memory_chain.invoke({"topic":topic, "level":level, "query":query},
+     response=conversation_memory_chain.invoke({"topic":topic, "level":level, "query":query},
                                  config={"configurable":{"session_id":session_id, "llm":llm, "k":k}})
+     return response["content"]
