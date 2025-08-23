@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>level</title>
+{% endblock %}
+
+{% block header %}
+            <div class="logo-container">
+                <span class="logo">AI</span>
+            </div>
+            <h1 class="take_quiz">
+                <a href="#">Quizz</a>
+            </h1>
+{% endblock %}
+
+{% block main %}
+            <div class="level-box">
+                <h2 class="level-title">How well do you<br/>understand this topic:</h2>
+                <div class="level">
+                    <button class="level-btn">Beginner</button>
+                    <button class="level-btn">Intermediate</button>
+                    <button class="level-btn">Advanced</button>
+                </div>
+                <nav class="proceed-nav">
+                    <button class="proceed-btn">Take Quiz</button>
+                    <button class="proceed-btn">Chat</button>
+                </nav>
+            </div>
+{% endblock %}

@@ -16,7 +16,7 @@ def index():
         return render_template("index.html", user_response=user_response, ai_response=ai_response)
     
     else:
-        return render_template("feedback.html")
+        return render_template("level.html")
     
 
 if __name__ =="__main__":
