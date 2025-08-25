@@ -25,7 +25,7 @@ The chatbot leverages Large Language Models (LLMs) to dynamically generate conte
 ## 📋 Getting Started
 <u>Prerequisites:</u>
 - Python 3.9+
-- A valid API key for either Google Gemini or Groq.
+- A valid API key for either Google Gemini
 
 <u>Installation:</u>
 1. Clone the repository:
