@@ -1,37 +1,46 @@
 from model import *
 
-#Greeting structure
-class UserLearningContext(BaseModel):
-    topic: Optional[str] = Field(None, description="The main topic the user wants to learn, including subtopic/focus if mentioned")
-    level: Optional[str] = Field(None, description="User understanding level: beginner, intermediate, expert")
-    ready_to_learn: bool = Field(False, description="Flag indicating when topic and level are selected and conversation can continue")
-    reply: str = Field("", description="Assistant’s follow-up reply asking for missing info or confirming readiness")
+# Greeting structure
 
+
+class UserLearningContext(BaseModel):
+    topic: Optional[str] = Field(
+        None, description="The main topic the user wants to learn, including subtopic/focus if mentioned")
+    flag: bool = Field(
+        False, description="Flag indicating when a topic has been provided by the user")
+    reply: str = Field(
+        "", description="Holds either the userprompt for the conversation LLM (once topic is given) or the assistant’s greeting/simple chat reply")
 
 
     # Greeting Chain
-greeting_system=SystemMessagePromptTemplate.from_template("""You are a friendly learning assistant. Your goal is to converse with the user to understand what they want to learn and assess their level.
+greeting_system = SystemMessagePromptTemplate.from_template("""You are a friendly learning assistant. Your goal is to converse with the user to understand what they want to learn.  
 
 Rules:
-1. Greet the user politely.
-2. Ask the user what topic they want to learn about.
-3. Ask the user how much they understand about the topic: 'beginner', 'intermediate', or 'expert'.
-6. Once both topic and level are known, set 'ready_to_learn' flag to True.
-7.Always respond **only** as a valid JSON object matching the UserLearningContext schema. 
-Never include text outside JSON. 
-All greetings, follow-up questions, or confirmations must go inside the `reply` field.
+1. Greet the user politely.  
+2. Ask the user what topic they want to learn about.  
+3. Once the user provides a topic, immediately set 'flag' to True.  
+4. When the user provides a topic, set the `reply` field to contain only the detailed 'userprompt'. The 'userprompt' must instruct the conversation LLM to explain the topic clearly and thoroughly with step-by-step explanations, examples, and analogies.  
+5. Always respond **only** as a valid JSON object matching the UserLearningContext schema.  
+6. Never include text outside JSON. The `reply` field must contain only the greeting (before topic is given) or the userprompt (after topic is given).  
 """)
 
-greeting_prompt=ChatPromptTemplate.from_messages([
+greeting_prompt = ChatPromptTemplate.from_messages([
     greeting_system,
     HumanMessagePromptTemplate.from_template("{query}")
 ])
 
-greeting_structured_llm=llm.with_structured_output(UserLearningContext)
+greeting_structured_llm = llm.with_structured_output(UserLearningContext)
 
-greeting_chain=(greeting_prompt
-                |greeting_structured_llm)
+greeting_chain = (greeting_prompt
+                  | greeting_structured_llm)
 
 
-def greet_chat():
-    return greeting_chain.invoke("I want to learn javascript functions and have a basic knowledge on it")
+def greet_chat(query: str):
+    greet = greeting_chain.invoke(query)
+    details = {
+        'topic': greet.topic,
+        'flag': greet.flag,
+        'prompt': greet.reply
+    }
+
+    return details

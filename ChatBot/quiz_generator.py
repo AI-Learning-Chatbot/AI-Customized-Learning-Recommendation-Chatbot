@@ -12,13 +12,13 @@ class QuizOutput(BaseModel):
         ..., 
         title="Options", 
         description="List of options for each question", 
-        example=[["Paris", "London", "Berlin", "Rome"], ["Portuguese", "Spanish", "English", "French"]]
+        example=[["Paris", "London", "Berlin", "Rome"], ["Spanish", "Portuguese", "English", "French"]]
     )
     answer: List[str] = Field(
         ..., 
         title="Answers", 
         description="List of correct answers corresponding to each question", 
-        example=["Paris", "Portuguese"]
+        example=['a', 'b']
     )
     explanation: List[str] = Field(
         ..., 
@@ -42,7 +42,7 @@ Your task is to automatically create quizzes in a structured JSON format that ma
 Rules:
 1. Generate exactly the number of questions requested.
 2. All questions must strictly stay within the requested topic; do not include anything outside the topic.
-3. Provide options, the correct answer, and an explanation for why the answer is correct.
+3. Provide options, the correct answer as its corresponding letter label ('a', 'b', 'c', 'd'), and an explanation for why the answer is correct.
 4. Output only in JSON format that can be directly parsed into the Pydantic model.
 """ )
 
@@ -59,9 +59,22 @@ quiz_chain=(quiz_prompt
             |quiz_structured_llm)
 
 
-def quiz_generator_chat(no_ques, topic, level):
-    return quiz_chain.invoke({
-    "number_of_questions": no_ques,
+def quiz_generator_chat(topic, level):
+    quiz= quiz_chain.invoke({
+    "number_of_questions": 5,
     "topic": topic,
     "level": level
-})
+    })
+
+    structured_quiz=[]
+
+    for i in range(5):
+        sets={}
+        sets['question']=quiz.question[i]
+        sets['options']=quiz.options[i]
+        sets['answer']=quiz.answer[i]
+        sets['explanation']=quiz.explanation[i]
+        structured_quiz.append(sets)
+
+    return structured_quiz
+

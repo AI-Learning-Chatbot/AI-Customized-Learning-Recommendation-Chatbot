@@ -13,10 +13,10 @@ def index():
     if request.method=="POST":
         user_response=request.form['input-field']
         ai_response=converstaion_chat(topic="python Function", level="expert", query=user_response, session_id="idx", k=2)
-        return render_template("index.html", user_response=user_response, ai_response=ai_response)
+        return render_template("chat.html", user_response=user_response, ai_response=ai_response)
     
     else:
-        return render_template("level.html")
+        return render_template("chat.html")
     
 
 if __name__ =="__main__":
