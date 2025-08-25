@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+    {% block head %}
+    {% endblock %}
+</head>
+<body>
+    <div class="container">
+        
+        <header class="header">
+            <div class="logo-container">
+                <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo" class="logo" id="logo">
+            </div>
+        </header>
+        
+
+        <main class="content">
+            {% block main %}
+            {% endblock %}
+        </main>
+
+        <footer class="input-container">
+            {% block footer %}
+            {% endblock %}
+        </footer>
+
+        <script>
+            document.getElementById("logo").addEventListener("click", function() {
+                window.location.href = "{{ url_for('index') }}";
+            });
+        </script>
+
+        {% block scripts %}
+        {% endblock %}
+
+    </div>
+</body>
+</html>

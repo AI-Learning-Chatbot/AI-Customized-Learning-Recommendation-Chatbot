@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Feedback</title>
+{% endblock %}
+
+{% block main %}
+<div class="score-box {% if score/total < 0.5 %}low{% else %}high{% endif %}">
+    <p>Quiz completed! You scored {{ score }}/{{ total }}</p>
+</div>
+
+<div class="feedback-box">
+    <h2 class="feedback-title">Feedback:</h2>
+    <p class="feedback">
+        {{ feedback|safe }}
+    </p>
+
+    {% if resources %}
+    <h3 class="resources">Resources</h3>
+    <ul>
+        {% for link in resources %}
+        <li><a href="{{ link }}" target="_blank">{{ link }}</a></li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</div>
+
+<div class="button">
+    <nav class="feedback-nav">
+        <button class="nav-btn" onclick="window.location.href='{{ url_for('quiz') }}'">Retry</button>
+        <button class="nav-btn" onclick="window.location.href='{{ url_for('chat') }}'">Chat</button>
+    </nav>
+</div>
+{% endblock %}

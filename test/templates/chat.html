@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Chatbot</title>
+{% endblock %}
+
+{% block main %}
+<div class="chat-container">
+    {% for message in messages %}
+        <div class="messages {% if message.role == 'ai' %}ai-response{% else %}user-response{% endif %}">
+            {{ message.text|safe }}
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}
+
+{% block footer %}
+<div class="input-wrapper">
+    <form class="input-form" action="{{ url_for('chat') }}" method="POST">
+        <input type="text" class="input-field" name="input-field" id="input-field" placeholder="Ask Anything"/>
+        <button class="input-btn">
+            <span class="input-btn-icon">➡️</span>
+        </button>
+    </form>
+</div>
+{% endblock %}

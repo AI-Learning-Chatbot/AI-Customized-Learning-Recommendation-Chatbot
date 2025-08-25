@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Index</title>
+{% endblock %}
+
+{% block main %}
+<section class="hero">
+    <h2 class="welcome-msg">Welcome to LearnAI - Your AI tutor for smarter,
+        <br>faster learning.
+    </h2>
+</section>
+
+<section class="suggestion">
+    <h3 class="suggestion-title">You may Explore</h3>
+    <div class="topics">
+        <div class="topic-card">Topic 1</div>
+        <div class="topic-card">Topic 2</div>
+        <div class="topic-card">Topic 3</div>
+        <div class="topic-card">Topic 4</div>
+        <div class="topic-card">Topic 5</div>
+    </div>
+</section>
+{% endblock %}
+
+{% block footer %}
+<div class="input-wrapper">
+    <form class="input-form" action="/" method="POST">
+        <input type="text" class="input-field" name="input-field" id="input-field" placeholder="Ask Anything" />
+        <button class="input-btn" type="submit">
+            <span class="input-btn-icon">➡️</span>
+        </button>
+    </form>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.querySelectorAll(".topic-card").forEach(card => {
+    card.addEventListener("mouseenter", () => {
+        card.style.backgroundColor = "lightgray";
+        card.style.color = "black";
+        card.style.cursor = "pointer";
+    });
+    card.addEventListener("mouseleave", () => {
+        card.style.backgroundColor = "";
+        card.style.color = "";
+    });
+
+    card.addEventListener("click", () => {
+        fetch("{{ url_for('select_topic') }}", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ topic: card.textContent.trim() })
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.redirect) {
+                window.location.href = data.redirect;
+            } else {
+                console.error("No redirect in response:", data);
+            }
+        })
+        .catch(err => console.error("Fetch error:", err));
+    });
+});
+</script>
+{% endblock %}
+

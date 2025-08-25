@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Feedback</title>
+{% endblock %}
+
+{% block header %}
+            <div class="logo-container">
+                <span class="logo">AI</span>
+            </div>
+            <h1 class="take_quiz">
+                <a href="#">Quizz</a>
+            </h1>
+{% endblock %}
+
+{% block main %}
+            <div class="quiz-box">
+                <h2 class="question">Feedback:</h2>
+                <div class="option">
+                    <label for="" class="quiz-option">
+                        <input type="radio" name="answer" value="a"/>
+                        <span class="custom-radio"></span>
+                        to allow
+                    </label>
+                    <label for="" class="quiz-option">
+                        <input type="radio" name="answer" value="b"/>
+                        <span class="custom-radio"></span>
+                        to allow
+                    </label>
+                    <label for="" class="quiz-option">
+                        <input type="radio" name="answer" value="c"/>
+                        <span class="custom-radio"></span>
+                        to allow
+                    </label>
+                    <label for="" class="quiz-option">
+                        <input type="radio" name="answer" value="d"/>
+                        <span class="custom-radio"></span>
+                        to allow
+                    </label>
+                </div>
+                <div class="button">
+                <nav class="quiz-nav">
+                    <button class="check-btn">Check</button>
+                    <button class="next-btn">Next</button>
+                    <button class="submit-btn">Submit</button>
+                </nav>
+            </div>
+            </div>
+{% endblock %}
