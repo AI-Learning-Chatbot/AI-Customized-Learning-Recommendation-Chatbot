@@ -35,7 +35,7 @@ greeting_chain = (greeting_prompt
                   | greeting_structured_llm)
 
 
-def greet_chat(query: str):
+def greet_chat(query):
     greet = greeting_chain.invoke(query)
     details = {
         'topic': greet.topic,

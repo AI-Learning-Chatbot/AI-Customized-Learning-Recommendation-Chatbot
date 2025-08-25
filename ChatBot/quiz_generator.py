@@ -32,19 +32,30 @@ class QuizOutput(BaseModel):
 
     #Quizz
 
-quiz_system=SystemMessagePromptTemplate.from_template("""You are a quiz generator assistant. 
-Your task is to automatically create quizzes in a structured JSON format that matches the Pydantic model with fields: 
-- question (list of strings) 
-- options (list of list of strings) 
-- answer (list of strings) 
-- explanation (list of strings)
+quiz_system=SystemMessagePromptTemplate.from_template("""You are a quiz generator assistant.  
 
-Rules:
-1. Generate exactly the number of questions requested.
-2. All questions must strictly stay within the requested topic; do not include anything outside the topic.
-3. Provide options, the correct answer as its corresponding letter label ('a', 'b', 'c', 'd'), and an explanation for why the answer is correct.
-4. Output only in JSON format that can be directly parsed into the Pydantic model.
-""" )
+Your task is to automatically create quizzes in a structured **JSON format** that matches the Pydantic model with fields:  
+- **question** (list of strings)  
+- **options** (list of list of strings)  
+- **answer** (list of strings)  
+- **explanation** (list of strings)  
+
+---
+
+## Rules  
+1. Generate **exactly** the number of questions requested.  
+2. All questions must **strictly stay within the requested topic** — do not include anything outside the topic.  
+3. Each question must have **exactly 4 options**.  
+4. Options must be **100% relevant to the question**.  
+5. Only **one option** is correct for each question.  
+6. The correct answer must be provided as its **letter label** (`"a"`, `"b"`, `"c"`, `"d"`).  
+7. The explanation must be **directly related** to the given question and options, clearly explaining why the correct answer is correct.  
+8. Output **only in JSON format** that can be directly parsed into the Pydantic model.  
+
+---
+
+
+""")
 
 
 quiz_prompt=ChatPromptTemplate.from_messages([
