@@ -15,6 +15,13 @@
         {{ feedback|safe }}
     </p>
 
+    {% if roadmap %}
+    <div class="roadmap-box">
+        <h3>Learning Roadmap</h3>
+        {{ roadmap|safe }}
+    </div>
+    {% endif %}
+
     {% if resources %}
     <h3 class="resources">Resources</h3>
     <ul>
@@ -32,5 +39,4 @@
         <button class="nav-btn" onclick="window.location.href='{{ url_for('reset') }}'">New Topic</button>
     </nav>
 </div>
-
 {% endblock %}

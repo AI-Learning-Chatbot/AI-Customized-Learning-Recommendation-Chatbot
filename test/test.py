@@ -7,15 +7,12 @@ db={
     "level":"expert",
     "flag": False
 }
-flag=False
-while not flag:
-    query=str(input("enter:"))
-    detail=greet_chat(query)
-    db["topic"]=detail['topic']
-    db["conversation_prompt"]=detail["prompt"]
-    if not db['flag']:
-        print(db["conversation_prompt"])
-    flag=db['flag']
+query=str(input("enter:"))
+detail=greet_chat(query)
+db["topic"]=detail['topic']
+db["conversation_prompt"]=detail["prompt"]
+if not db['flag']:
+    print(db["conversation_prompt"])
 print("\n -------------------------------------------------------------------------------------")
 
 print("What would you like to do Learn(1) or Take a quiz(2)")

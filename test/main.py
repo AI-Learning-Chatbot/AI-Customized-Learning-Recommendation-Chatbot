@@ -107,6 +107,16 @@ def feedback():
         extensions=["fenced_code", "tables"]
     ))
 
+    # Convert roadmap (list) to markdown for display
+    roadmap_list = feedback_data.get("roadmap", [])
+    roadmap_html = ""
+    if roadmap_list:
+        roadmap_text = "\n".join(f"- {step}" for step in roadmap_list)
+        roadmap_html = Markup(markdown.markdown(
+            f"### Learning Roadmap\n{roadmap_text}",
+            extensions=["fenced_code", "tables"]
+        ))
+
     # Clear quiz-related session data so a retry starts fresh
     session.pop("score", None)
     session.pop("total", None)
@@ -118,6 +128,7 @@ def feedback():
         score=score,
         total=total,
         feedback=feedback_html,
+        roadmap=roadmap_html,
         resources=feedback_data.get("resources", [])
     )
 
@@ -129,7 +140,7 @@ def reset():
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000, debug=True)
-    #app.run(host="127.0.0.1", port=5001, debug=True)
+    #app.run(host="0.0.0.0", port=5000, debug=True)
+    app.run(host="127.0.0.1", port=5001, debug=True)
 
 

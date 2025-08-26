@@ -6,14 +6,14 @@
 
 {% block main %}
 <div class="quiz-box" id="quiz-box">
-    <h2 class="question" id="question">
+    <p class="question" id="question">
         {{ quiz[index].question }}
-    </h2>
+    </p>
 
     <div class="option" id="options">
         {% for opt in quiz[index].options %}
         <label class="quiz-option">
-            <input type="radio" name="answer" value="{{ opt }}"/>
+            <input type="radio" name="answer" value="{{ opt }}" />
             <span class="custom-radio"></span>
             {{ opt }}
         </label>
@@ -30,78 +30,78 @@
 </div>
 
 <script>
-let quizData = {{ quiz|tojson }};
-let currentIndex = {{ index }};
-let score = {{ score }};
-let selectedAnswer = null;
+    let quizData = {{ quiz| tojson }};
+    let currentIndex = {{ index }};
+    let score = {{ score }};
+    let selectedAnswer = null;
 
-function loadQuestion(idx) {
-    let q = quizData[idx];
-    document.getElementById("question").innerText = q.question;
+    function loadQuestion(idx) {
+        let q = quizData[idx];
+        document.getElementById("question").innerText = q.question;
 
-    let optionsContainer = document.getElementById("options");
-    optionsContainer.innerHTML = "";
-    q.options.forEach(opt => {
-        let label = document.createElement("label");
-        label.className = "quiz-option";
-        label.innerHTML = `
+        let optionsContainer = document.getElementById("options");
+        optionsContainer.innerHTML = "";
+        q.options.forEach(opt => {
+            let label = document.createElement("label");
+            label.className = "quiz-option";
+            label.innerHTML = `
             <input type="radio" name="answer" value="${opt}"/>
             <span class="custom-radio"></span>
             ${opt}
         `;
-        optionsContainer.appendChild(label);
-    });
+            optionsContainer.appendChild(label);
+        });
 
-    document.getElementById("feedback").innerHTML = "";
-    document.getElementById("check-btn").style.display = "inline-block";
-    document.getElementById("next-btn").style.display = "none";
-    document.getElementById("submit-btn").style.display = "none";
-}
-
-// Handle Check button
-document.getElementById("check-btn").addEventListener("click", () => {
-    let selected = document.querySelector("input[name='answer']:checked");
-    if (!selected) {
-        alert("Please select an answer first!");
-        return;
+        document.getElementById("feedback").innerHTML = "";
+        document.getElementById("check-btn").style.display = "inline-block";
+        document.getElementById("next-btn").style.display = "none";
+        document.getElementById("submit-btn").style.display = "none";
     }
 
-    let q = quizData[currentIndex];
-    let feedbackBox = document.getElementById("feedback");
+    // Handle Check button
+    document.getElementById("check-btn").addEventListener("click", () => {
+        let selected = document.querySelector("input[name='answer']:checked");
+        if (!selected) {
+            alert("Please select an answer first!");
+            return;
+        }
 
-    if (selected.value === q.answer) {
-        score++;
-        feedbackBox.innerHTML = `<div style="background:green; color:white; padding:10px; border-radius:8px;">
+        let q = quizData[currentIndex];
+        let feedbackBox = document.getElementById("feedback");
+
+        if (selected.value === q.answer) {
+            score++;
+            feedbackBox.innerHTML = `<div style="background:green; color:white; padding:10px; border-radius:8px;">
             ✅ Correct! ${q.explanation}
         </div>`;
-    } else {
-        feedbackBox.innerHTML = `<div style="background:red; color:white; padding:10px; border-radius:8px;">
+        } else {
+            feedbackBox.innerHTML = `<div style="background:red; color:white; padding:10px; border-radius:8px;">
             ❌ Incorrect! ${q.explanation}
         </div>`;
-    }
+        }
 
-    document.getElementById("check-btn").style.display = "none";
+        document.getElementById("check-btn").style.display = "none";
 
-    if (currentIndex < quizData.length - 1) {
-        document.getElementById("next-btn").style.display = "inline-block";
-    } else {
-        document.getElementById("submit-btn").style.display = "inline-block";
-    }
-});
+        if (currentIndex < quizData.length - 1) {
+            document.getElementById("next-btn").style.display = "inline-block";
+        } else {
+            document.getElementById("submit-btn").style.display = "inline-block";
+        }
+    });
 
-// Handle Next button
-document.getElementById("next-btn").addEventListener("click", () => {
-    currentIndex++;
+    // Handle Next button
+    document.getElementById("next-btn").addEventListener("click", () => {
+        currentIndex++;
+        loadQuestion(currentIndex);
+    });
+
+    // Handle Final Submit button
+    document.getElementById("submit-btn").addEventListener("click", () => {
+        // Redirect to feedback page with score
+        window.location.href = "{{ url_for('feedback') }}?score=" + score + "&total=" + quizData.length;
+    });
+
+    // Initial load
     loadQuestion(currentIndex);
-});
-
-// Handle Final Submit button
-document.getElementById("submit-btn").addEventListener("click", () => {
-    // Redirect to feedback page with score
-    window.location.href = "{{ url_for('feedback') }}?score=" + score + "&total=" + quizData.length;
-});
-
-// Initial load
-loadQuestion(currentIndex);
 </script>
 {% endblock %}
