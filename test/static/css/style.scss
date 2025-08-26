@@ -20,6 +20,11 @@ $score-high: rgba(108, 220, 93, 0.7);
     box-sizing: border-box;
 }
 
+html, body {
+  overflow-x: hidden;
+}
+
+
 body {
     background-color: $secondary-bg;
     color: $text-color;
@@ -63,8 +68,8 @@ body {
     justify-content: center;
 }
 
-.chat-input-containeer{
-    position: sticky;
+.chat-input-container{
+    position: fixed;
     bottom: 0;
 }
 
@@ -117,7 +122,7 @@ body {
 }
 
 .chat-container {
-    width: 60%;
+    width: 70%;
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -125,10 +130,33 @@ body {
     max-height: 70vh;
     /* prevents overflow */
     padding: 10px;
+
+    /* WebKit browsers */
+    &::-webkit-scrollbar {
+        width: 10px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: $secondary-bg; /* optional: track color */
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: $secondary-bg; /* your desired color */
+        border-radius: 5px;
+        border: 2px solid #f1f1f1; /* optional: padding effect */
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+        background-color: darken($secondary-bg, 10%); /* optional hover effect */
+    }
+
+    /* Firefox */
+    scrollbar-width: thin;
+    scrollbar-color: $secondary-bg #f1f1f1;
 }
 
 .messages {
-    max-width: 70%;
+    max-width: 90%;
     padding: 10px 15px;
     border-radius: 20px;
     line-height: 1.5;

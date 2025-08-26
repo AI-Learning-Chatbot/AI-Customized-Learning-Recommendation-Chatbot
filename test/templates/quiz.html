@@ -8,8 +8,10 @@
 <div id="loading-spinner" class="spinner hidden"></div>
 <div class="quiz-box" id="quiz-box">
     <h2 class="question" id="question">
-        {{ quiz[index].question }}
+    Question {{ index + 1 }} of {{ quiz|length }}: 
+    {{ quiz[index].question|safe }}
     </h2>
+
 
     <div class="option" id="options">
         {% for opt in quiz[index].options %}
@@ -48,7 +50,7 @@ function hideSpinner() {
 
 function loadQuestion(idx) {
     let q = quizData[idx];
-    document.getElementById("question").innerText = q.question;
+    document.getElementById("question").innerHTML = `Question ${idx + 1} of ${quizData.length}: ${q.question}`;
 
     let optionsContainer = document.getElementById("options");
     optionsContainer.innerHTML = "";
@@ -70,6 +72,7 @@ function loadQuestion(idx) {
 
     hideSpinner();
 }
+
 
 // Handle Check button
 document.getElementById("check-btn").addEventListener("click", () => {
