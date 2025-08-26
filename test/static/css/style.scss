@@ -109,7 +109,7 @@ body {
 }
 
 .input-field::placeholder {
-    color: darken($text-color, 20%);
+    color: lighten($text-color, 25%);
 }
 
 .content {
@@ -122,12 +122,13 @@ body {
 }
 
 .chat-container {
-    width: 70%;
+    width: 60%;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 15px;
     overflow-y: auto;
     max-height: 70vh;
+    margin-top: 10px;
     /* prevents overflow */
     padding: 10px;
 
@@ -137,26 +138,27 @@ body {
     }
 
     &::-webkit-scrollbar-track {
-        background: $secondary-bg; /* optional: track color */
+        background: $secondary-bg; /* track color */
+        border-radius: 5px;
     }
 
     &::-webkit-scrollbar-thumb {
-        background-color: $secondary-bg; /* your desired color */
+        background-color: #ffffff; /* thumb color = white */
         border-radius: 5px;
-        border: 2px solid #f1f1f1; /* optional: padding effect */
+        border: 2px solid $secondary-bg; /* optional: padding effect to match background */
     }
 
     &::-webkit-scrollbar-thumb:hover {
-        background-color: darken($secondary-bg, 10%); /* optional hover effect */
+        background-color: lighten(#ffffff, 10%); /* optional hover effect */
     }
 
     /* Firefox */
     scrollbar-width: thin;
-    scrollbar-color: $secondary-bg #f1f1f1;
+    scrollbar-color: #ffffff $secondary-bg; /* thumb color = white, track = $secondary-bg */
 }
 
 .messages {
-    max-width: 90%;
+    max-width: 100%;
     padding: 10px 15px;
     border-radius: 20px;
     line-height: 1.5;
@@ -177,17 +179,66 @@ body {
     border-top-right-radius: 5px;
 }
 
+/* Chat header above chat-container */
+.chat-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 70%; /* match chat-container width */
+    margin: 0 auto 15px auto;
+    padding: 0 10px;
+}
+
+.chat-topic {
+    font-family: $font-head;
+    font-size: 1.5em;
+    font-weight: 700;
+    background: linear-gradient(90deg, #FFD700, #FF69B4, #00FFFF); /* matches welcome-msg */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+}
+
+/* Quiz button next to topic */
+// .quiz-button {
+//     background: none;
+//     color: $primary-color;
+//     padding: 8px 16px;
+//     border:none;
+//     font-weight: bold;
+//     font-family: $font-main;
+//     text-decoration: none;
+//     transition: transform 0.2s, box-shadow 0.2s;
+// }
+
+// .quiz-button:hover {
+//     transform: translateY(-2px);
+//     box-shadow: $shadow;
+// }
+
 // for index page
 
 .welcome-msg {
-    font-family: cursive;
+    font-family: 'Poppins', 'Segoe UI', sans-serif;
     margin-bottom: 30px;
     text-align: center;
-    font-size: 1.5em;
-    font-weight: bold;
-    line-height: 1.2;
-    color: $text-color;
+    font-size: 1.8em;
+    font-weight: 700;
+    line-height: 1;
+
+    /* Bright, exclusive gradient */
+    background: linear-gradient(90deg, #FFD700, #FF69B4, #00FFFF); /* gold → hot pink → cyan */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    /* Optional: subtle text shadow for readability */
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
 }
+
+.welcome-msg .welcome-small{
+    font-size: 0.8em;
+}
+
 
 .suggestion {
     text-align: center;
@@ -341,10 +392,18 @@ body {
     font-size: 1.5em;
     margin-top: 0;
     margin-bottom: 40px;
-    color: $text-color;
     line-height: 1.2;
     font-weight: bold;
+
+    /* Same bright gradient as welcome message */
+    background: linear-gradient(90deg, #FFD700, #FF69B4, #00FFFF);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    /* Optional: subtle text shadow for readability */
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
 }
+
 
 .level {
     display: flex;
@@ -385,11 +444,12 @@ body {
 }
 
 .quiz-btn,
-.chat-btn {
+.chat-btn, .quiz-button {
     margin-top: 20px;
     background: none;
     border: none;
     color: $primary-color;
+    text-decoration: none;
     font-size: 1.1em;
     font-weight: bold;
     cursor: pointer;
@@ -397,7 +457,8 @@ body {
 }
 
 .quiz-btn:hover,
-.chat-btn:hover {
+.chat-btn:hover ,
+.quiz-button:hover{
     color: $hover-color;
 }
 

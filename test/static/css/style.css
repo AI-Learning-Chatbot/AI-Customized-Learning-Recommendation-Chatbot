@@ -91,11 +91,11 @@ body {
 }
 
 .input-field::-moz-placeholder {
-  color: black;
+  color: rgb(114.75, 114.75, 114.75);
 }
 
 .input-field::placeholder {
-  color: black;
+  color: rgb(114.75, 114.75, 114.75);
 }
 
 .content {
@@ -108,36 +108,38 @@ body {
 }
 
 .chat-container {
-  width: 70%;
+  width: 60%;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 15px;
   overflow-y: auto;
   max-height: 70vh;
+  margin-top: 10px;
   /* prevents overflow */
   padding: 10px;
   /* WebKit browsers */
   /* Firefox */
   scrollbar-width: thin;
-  scrollbar-color: #f0e6fa #f1f1f1;
+  scrollbar-color: #ffffff #f0e6fa; /* thumb color = white, track = $secondary-bg */
 }
 .chat-container::-webkit-scrollbar {
   width: 10px;
 }
 .chat-container::-webkit-scrollbar-track {
-  background: #f0e6fa; /* optional: track color */
+  background: #f0e6fa; /* track color */
+  border-radius: 5px;
 }
 .chat-container::-webkit-scrollbar-thumb {
-  background-color: #f0e6fa; /* your desired color */
+  background-color: #ffffff; /* thumb color = white */
   border-radius: 5px;
-  border: 2px solid #f1f1f1; /* optional: padding effect */
+  border: 2px solid #f0e6fa; /* optional: padding effect to match background */
 }
 .chat-container::-webkit-scrollbar-thumb:hover {
-  background-color: rgb(214.5, 187.5, 241.5); /* optional hover effect */
+  background-color: white; /* optional hover effect */
 }
 
 .messages {
-  max-width: 90%;
+  max-width: 100%;
   padding: 10px 15px;
   border-radius: 20px;
   line-height: 1.5;
@@ -158,14 +160,44 @@ body {
   border-top-right-radius: 5px;
 }
 
+/* Chat header above chat-container */
+.chat-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 70%; /* match chat-container width */
+  margin: 0 auto 15px auto;
+  padding: 0 10px;
+}
+
+.chat-topic {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.5em;
+  font-weight: 700;
+  background: linear-gradient(90deg, #FFD700, #FF69B4, #00FFFF); /* matches welcome-msg */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+/* Quiz button next to topic */
 .welcome-msg {
-  font-family: cursive;
+  font-family: "Poppins", "Segoe UI", sans-serif;
   margin-bottom: 30px;
   text-align: center;
-  font-size: 1.5em;
-  font-weight: bold;
-  line-height: 1.2;
-  color: #333;
+  font-size: 1.8em;
+  font-weight: 700;
+  line-height: 1;
+  /* Bright, exclusive gradient */
+  background: linear-gradient(90deg, #FFD700, #FF69B4, #00FFFF); /* gold → hot pink → cyan */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  /* Optional: subtle text shadow for readability */
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.welcome-msg .welcome-small {
+  font-size: 0.8em;
 }
 
 .suggestion {
@@ -311,9 +343,14 @@ body {
   font-size: 1.5em;
   margin-top: 0;
   margin-bottom: 40px;
-  color: #333;
   line-height: 1.2;
   font-weight: bold;
+  /* Same bright gradient as welcome message */
+  background: linear-gradient(90deg, #FFD700, #FF69B4, #00FFFF);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  /* Optional: subtle text shadow for readability */
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
 }
 
 .level {
@@ -355,11 +392,12 @@ body {
 }
 
 .quiz-btn,
-.chat-btn {
+.chat-btn, .quiz-button {
   margin-top: 20px;
   background: none;
   border: none;
   color: rgba(187, 130, 237, 0.8039215686);
+  text-decoration: none;
   font-size: 1.1em;
   font-weight: bold;
   cursor: pointer;
@@ -367,7 +405,8 @@ body {
 }
 
 .quiz-btn:hover,
-.chat-btn:hover {
+.chat-btn:hover,
+.quiz-button:hover {
   color: #5750d6;
 }
 

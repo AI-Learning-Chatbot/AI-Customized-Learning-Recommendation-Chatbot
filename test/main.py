@@ -60,23 +60,22 @@ def chat():
     if "messages" not in session:
         session["messages"] = []
 
+    topic = session.get("topic", "General")  # ensure topic is available
+
     if request.method == "GET":
-        # First AI message
-        response = converstaion_chat(session["topic"], session["level"], session["conversation_prompt"], "idx")
+        response = converstaion_chat(topic, session.get("level"), session.get("conversation_prompt", ""), "idx")
         html_response = Markup(markdown.markdown(response, extensions=["fenced_code", "tables"]))
         session["messages"].append({"role": "ai", "text": html_response})
-        session.modified = True  # tell Flask session data changed
+        session.modified = True
         return render_template("chat.html", messages=session["messages"])
 
     if request.method == "POST":
         query = request.form.get("input-field")
         if query:
             session["messages"].append({"role": "user", "text": query})
-
-            response = converstaion_chat(session["topic"], session["level"], query, "idx")
+            response = converstaion_chat(topic, session.get("level"), query, "idx")
             html_response = Markup(markdown.markdown(response, extensions=["fenced_code", "tables"]))
             session["messages"].append({"role": "ai", "text": html_response})
-
             session.modified = True
 
         return render_template("chat.html", messages=session["messages"])

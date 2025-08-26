@@ -5,6 +5,10 @@
 {% endblock %}
 
 {% block main %}
+<div class="chat-header">
+    <h2 class="chat-topic">{{ session['topic'] }}</h2>
+    <a href="{{ url_for('quiz') }}" class="quiz-button">Take Quiz</a>
+</div>
 <div id="loading-spinner" class="spinner hidden"></div>
 <div class="chat-container">
     {% for message in messages %}
