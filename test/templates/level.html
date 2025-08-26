@@ -5,6 +5,9 @@
 {% endblock %}
 
 {% block main %}
+<!-- Spinner -->
+<div id="loading-spinner" class="spinner hidden"></div>
+
 <div class="level-box">
     <h2 class="level-title">How well do you<br/>understand this {{ topic }}:</h2>
     <div class="level">
@@ -22,54 +25,67 @@
 
 {% block scripts %}
 <script>
-let selectedLevel = null;
+document.addEventListener("DOMContentLoaded", () => {
+    let selectedLevel = null;
+    const spinner = document.getElementById("loading-spinner");
+    const quizBtn = document.querySelector(".quiz-btn");
+    const chatBtn = document.querySelector(".chat-btn");
 
-// Exclusive selection for level buttons
-document.querySelectorAll(".level-btn").forEach(btn => {
-    btn.addEventListener("click", () => {
-        // remove .selected from all
-        document.querySelectorAll(".level-btn").forEach(b => b.classList.remove("selected"));
-        // add to clicked
-        btn.classList.add("selected");
-        selectedLevel = btn.textContent.trim();
+    // Handle level selection
+    document.querySelectorAll(".level-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+            document.querySelectorAll(".level-btn").forEach(b => b.classList.remove("selected"));
+            btn.classList.add("selected");
+            selectedLevel = btn.textContent.trim();
 
-        // ✅ Show quiz & chat buttons once a level is chosen
-        document.querySelector(".quiz-btn").style.display = "inline-block";
-        document.querySelector(".chat-btn").style.display = "inline-block";
+            quizBtn.style.display = "inline-block";
+            chatBtn.style.display = "inline-block";
+        });
     });
-});
 
-// Quiz button click
-document.querySelector(".quiz-btn").addEventListener("click", () => {
-    if (!selectedLevel) {
-        alert("Please select a level first!");
-        return;
-    }
-    fetch("{{ url_for('set_level') }}", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ level: selectedLevel, target: "quiz" })
-    })
-    .then(res => res.json())
-    .then(data => {
-        if (data.redirect) window.location.href = data.redirect;
+    // Quiz button click
+    quizBtn.addEventListener("click", () => {
+        if (!selectedLevel) {
+            alert("Please select a level first!");
+            return;
+        }
+        spinner.classList.remove("hidden");
+        fetch("{{ url_for('set_level') }}", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ level: selectedLevel, target: "quiz" })
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.redirect) window.location.href = data.redirect;
+            else spinner.classList.add("hidden");
+        })
+        .catch(() => spinner.classList.add("hidden"));
     });
-});
 
-// Chat button click
-document.querySelector(".chat-btn").addEventListener("click", () => {
-    if (!selectedLevel) {
-        alert("Please select a level first!");
-        return;
-    }
-    fetch("{{ url_for('set_level') }}", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ level: selectedLevel, target: "chat" })
-    })
-    .then(res => res.json())
-    .then(data => {
-        if (data.redirect) window.location.href = data.redirect;
+    // Chat button click
+    chatBtn.addEventListener("click", () => {
+        if (!selectedLevel) {
+            alert("Please select a level first!");
+            return;
+        }
+        spinner.classList.remove("hidden");
+        fetch("{{ url_for('set_level') }}", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ level: selectedLevel, target: "chat" })
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.redirect) window.location.href = data.redirect;
+            else spinner.classList.add("hidden");
+        })
+        .catch(() => spinner.classList.add("hidden"));
+    });
+
+    // Hide spinner on page load
+    window.addEventListener("load", () => {
+        spinner.classList.add("hidden");
     });
 });
 </script>
