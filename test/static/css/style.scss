@@ -1,18 +1,4 @@
-$primary-color: #cea6f1dd; // main button, highlights
-$hover-color: #5750d6; // hover for buttons
-$light-bg: linear-gradient(180deg, #fff, #f7f0ff); // body background
-$font-main: 'Segoe UI', sans-serif;
-$font-alt: 'Comic Neue', cursive;
-$text-color: #333; // main text color
-$secondary-bg: #f0e6fa; // cards, input background
-$border-radius: 8px;
-$shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-$success-color: #4ca360c0;
-$error-color: #d8515e9a;
-$score-low: rgba(195, 81, 92, 0.547);
-$score-high: rgba(40, 167, 70, 0.622);
-
-* {
+*{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -37,7 +23,8 @@ body {
 
 .header {
     display: flex;
-    padding: 10px;
+    padding: 10px 0;
+    margin-left: 10px;
     margin-bottom: 20px;
     align-self: flex-start;
     width: 100%;
@@ -45,14 +32,17 @@ body {
     position: fixed;
 }
 
-.logo-container {
+.logo-container{
+    background-color: plum;
+    border-radius: 5px;
+    padding: 5px 10px;
     margin-right: 10px;
 
 }
 
 .logo {
-    height: 100px;
-    width: auto;
+    height: 40px;   
+    width: auto;    
     display: block;
 }
 
@@ -111,7 +101,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 10%;
+    margin-top: 18%;
     flex-direction: column;
     padding: 20px;
 }

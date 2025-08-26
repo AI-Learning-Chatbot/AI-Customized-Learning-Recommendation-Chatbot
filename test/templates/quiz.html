@@ -5,6 +5,7 @@
 {% endblock %}
 
 {% block main %}
+<div id="loading-spinner" class="spinner hidden"></div>
 <div class="quiz-box" id="quiz-box">
     <p class="question" id="question">
         {{ quiz[index].question }}
@@ -30,10 +31,10 @@
 </div>
 
 <script>
-    let quizData = {{ quiz| tojson }};
-    let currentIndex = {{ index }};
-    let score = {{ score }};
-    let selectedAnswer = null;
+let quizData = {{ quiz|tojson }};
+let currentIndex = {{ index }};
+let score = {{ score }};
+let selectedAnswer = null;
 
     function loadQuestion(idx) {
         let q = quizData[idx];
@@ -52,19 +53,19 @@
             optionsContainer.appendChild(label);
         });
 
-        document.getElementById("feedback").innerHTML = "";
-        document.getElementById("check-btn").style.display = "inline-block";
-        document.getElementById("next-btn").style.display = "none";
-        document.getElementById("submit-btn").style.display = "none";
-    }
+    document.getElementById("feedback").innerHTML = "";
+    document.getElementById("check-btn").style.display = "inline-block";
+    document.getElementById("next-btn").style.display = "none";
+    document.getElementById("submit-btn").style.display = "none";
+}
 
-    // Handle Check button
-    document.getElementById("check-btn").addEventListener("click", () => {
-        let selected = document.querySelector("input[name='answer']:checked");
-        if (!selected) {
-            alert("Please select an answer first!");
-            return;
-        }
+// Handle Check button
+document.getElementById("check-btn").addEventListener("click", () => {
+    let selected = document.querySelector("input[name='answer']:checked");
+    if (!selected) {
+        alert("Please select an answer first!");
+        return;
+    }
 
         let q = quizData[currentIndex];
         let feedbackBox = document.getElementById("feedback");
@@ -82,26 +83,26 @@
 
         document.getElementById("check-btn").style.display = "none";
 
-        if (currentIndex < quizData.length - 1) {
-            document.getElementById("next-btn").style.display = "inline-block";
-        } else {
-            document.getElementById("submit-btn").style.display = "inline-block";
-        }
-    });
+    if (currentIndex < quizData.length - 1) {
+        document.getElementById("next-btn").style.display = "inline-block";
+    } else {
+        document.getElementById("submit-btn").style.display = "inline-block";
+    }
+});
 
-    // Handle Next button
-    document.getElementById("next-btn").addEventListener("click", () => {
-        currentIndex++;
-        loadQuestion(currentIndex);
-    });
-
-    // Handle Final Submit button
-    document.getElementById("submit-btn").addEventListener("click", () => {
-        // Redirect to feedback page with score
-        window.location.href = "{{ url_for('feedback') }}?score=" + score + "&total=" + quizData.length;
-    });
-
-    // Initial load
+// Handle Next button
+document.getElementById("next-btn").addEventListener("click", () => {
+    currentIndex++;
     loadQuestion(currentIndex);
+});
+
+// Handle Final Submit button
+document.getElementById("submit-btn").addEventListener("click", () => {
+    // Redirect to feedback page with score
+    window.location.href = "{{ url_for('feedback') }}?score=" + score + "&total=" + quizData.length;
+});
+
+// Initial load
+loadQuestion(currentIndex);
 </script>
 {% endblock %}
