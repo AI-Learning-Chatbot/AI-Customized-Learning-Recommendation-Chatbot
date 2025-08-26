@@ -5,6 +5,7 @@
 {% endblock %}
 
 {% block main %}
+<div id="loading-spinner" class="spinner hidden"></div>
 <div class="quiz-box" id="quiz-box">
     <h2 class="question" id="question">
         {{ quiz[index].question }}
@@ -35,6 +36,16 @@ let currentIndex = {{ index }};
 let score = {{ score }};
 let selectedAnswer = null;
 
+const spinner = document.getElementById("loading-spinner");
+
+function showSpinner() {
+    spinner.classList.remove("hidden");
+}
+
+function hideSpinner() {
+    spinner.classList.add("hidden");
+}
+
 function loadQuestion(idx) {
     let q = quizData[idx];
     document.getElementById("question").innerText = q.question;
@@ -56,15 +67,21 @@ function loadQuestion(idx) {
     document.getElementById("check-btn").style.display = "inline-block";
     document.getElementById("next-btn").style.display = "none";
     document.getElementById("submit-btn").style.display = "none";
+
+    hideSpinner();
 }
 
 // Handle Check button
 document.getElementById("check-btn").addEventListener("click", () => {
-    let selected = document.querySelector("input[name='answer']:checked");
-    if (!selected) {
-        alert("Please select an answer first!");
-        return;
-    }
+    showSpinner();
+
+    setTimeout(() => {
+        let selected = document.querySelector("input[name='answer']:checked");
+        if (!selected) {
+            alert("Please select an answer first!");
+            hideSpinner();
+            return;
+        }
 
     let q = quizData[currentIndex];
     let feedbackBox = document.getElementById("feedback");
@@ -87,21 +104,30 @@ document.getElementById("check-btn").addEventListener("click", () => {
     } else {
         document.getElementById("submit-btn").style.display = "inline-block";
     }
+    hideSpinner();
+    }, 500);
 });
+
 
 // Handle Next button
 document.getElementById("next-btn").addEventListener("click", () => {
-    currentIndex++;
-    loadQuestion(currentIndex);
+    showSpinner();
+    setTimeout(() => {
+        currentIndex++;
+        loadQuestion(currentIndex);
+    }, 500);
 });
 
 // Handle Final Submit button
 document.getElementById("submit-btn").addEventListener("click", () => {
-    // Redirect to feedback page with score
-    window.location.href = "{{ url_for('feedback') }}?score=" + score + "&total=" + quizData.length;
+    showSpinner();
+    setTimeout(() => {
+        window.location.href = "{{ url_for('feedback') }}?score=" + score + "&total=" + quizData.length;
+    }, 300); 
 });
 
-// Initial load
+
+
 loadQuestion(currentIndex);
 </script>
 {% endblock %}

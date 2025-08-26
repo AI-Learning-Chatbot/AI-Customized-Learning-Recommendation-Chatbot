@@ -5,6 +5,7 @@
 {% endblock %}
 
 {% block main %}
+<div id="loading-spinner" class="spinner hidden"></div>
 <div class="chat-container">
     {% for message in messages %}
         <div class="messages {% if message.role == 'ai' %}ai-response{% else %}user-response{% endif %}">
@@ -23,4 +24,23 @@
         </button>
     </form>
 </div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    const form = document.querySelector(".input-form");
+    const spinner = document.getElementById("loading-spinner");
+
+    form.addEventListener("submit", () => {
+        spinner.classList.remove("hidden");
+    });
+
+    window.addEventListener("load", () => {
+        spinner.classList.add("hidden");
+    });
+
+    // Auto-scroll to latest message
+    const chatContainer = document.querySelector(".chat-container");
+    chatContainer.scrollTop = chatContainer.scrollHeight;
+</script>
 {% endblock %}
