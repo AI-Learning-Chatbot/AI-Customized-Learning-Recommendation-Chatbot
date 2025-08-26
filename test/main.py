@@ -1,4 +1,4 @@
-from flask import Flask, redirect, render_template, request, url_for
+from flask import Flask, redirect, render_template, request, url_for, session
 from flask_scss import Scss
 from conversation import converstaion_chat
 from greet import greet_chat
@@ -8,9 +8,8 @@ import markdown
 from markupsafe import Markup
 
 app = Flask(__name__)
+app.secret_key = "supersecretkey"  # REQUIRED for Flask sessions
 Scss(app)
-
-db = {}
 
 
 @app.route("/", methods=["GET", "POST"])
@@ -19,8 +18,8 @@ def index():
         value = request.form.get("input-field")  # from the input box
         if value:
             detail = greet_chat(value)
-            db["topic"] = detail["topic"]
-            db["conversation_prompt"] = detail["prompt"]
+            session["topic"] = detail["topic"]
+            session["conversation_prompt"] = detail["prompt"]
             return redirect(url_for("level"))
     return render_template("index.html")
 
@@ -30,21 +29,23 @@ def select_topic():
     value = request.json.get("topic") if request.is_json else None
     if value:
         detail = greet_chat(value)
-        db["topic"] = detail["topic"]
-        db["conversation_prompt"] = detail["prompt"]
+        session["topic"] = detail["topic"]
+        session["conversation_prompt"] = detail["prompt"]
         return {"redirect": url_for("level")}, 200
     return {"error": "No topic provided"}, 400
+
 
 @app.route("/level", methods=["GET", "POST"])
 def level():
     return render_template("level.html")
+
 
 @app.route("/set_level", methods=["POST"])
 def set_level():
     level_value = request.json.get("level")
     target = request.json.get("target")   # "quiz" or "chat"
     if level_value and target:
-        db["level"] = level_value
+        session["level"] = level_value
         if target == "quiz":
             return {"redirect": url_for("quiz")}
         elif target == "chat":
@@ -54,38 +55,41 @@ def set_level():
 
 @app.route("/chat", methods=["GET", "POST"])
 def chat():
-    if "messages" not in db:
-        db["messages"] = []
+    if "messages" not in session:
+        session["messages"] = []
 
     if request.method == "GET":
         # First AI message
-        response = converstaion_chat(db["topic"], db["level"], db["conversation_prompt"], "idx")
-        # Convert markdown → HTML safely
+        response = converstaion_chat(session["topic"], session["level"], session["conversation_prompt"], "idx")
         html_response = Markup(markdown.markdown(response, extensions=["fenced_code", "tables"]))
-        db["messages"].append({"role": "ai", "text": html_response})
-        return render_template("chat.html", messages=db["messages"])
+        session["messages"].append({"role": "ai", "text": html_response})
+        session.modified = True  # tell Flask session data changed
+        return render_template("chat.html", messages=session["messages"])
 
     if request.method == "POST":
         query = request.form.get("input-field")
         if query:
-            db["messages"].append({"role": "user", "text": query})
+            session["messages"].append({"role": "user", "text": query})
 
-            response = converstaion_chat(db["topic"], db["level"], query, "idx")
+            response = converstaion_chat(session["topic"], session["level"], query, "idx")
             html_response = Markup(markdown.markdown(response, extensions=["fenced_code", "tables"]))
-            db["messages"].append({"role": "ai", "text": html_response})
+            session["messages"].append({"role": "ai", "text": html_response})
 
-        return render_template("chat.html", messages=db["messages"])
+            session.modified = True
+
+        return render_template("chat.html", messages=session["messages"])
+
 
 @app.route("/quiz", methods=["GET", "POST"])
 def quiz():
-    if "quiz_data" not in db:
-        # Generate quiz only once
-        db["quiz_data"] = quiz_generator_chat(db["topic"], db["level"])
-        db["current_index"] = 0
-        db["score"] = 0
+    if "quiz_data" not in session:
+        # Generate quiz only once per user
+        session["quiz_data"] = quiz_generator_chat(session["topic"], session["level"])
+        session["current_index"] = 0
+        session["score"] = 0
+        session.modified = True
 
-    return render_template("quiz.html", quiz=db["quiz_data"], index=db["current_index"], score=db["score"])
-
+    return render_template("quiz.html", quiz=session["quiz_data"], index=session["current_index"], score=session["score"])
 
 
 @app.route("/feedback")
@@ -93,16 +97,21 @@ def feedback():
     score = request.args.get("score", 0, type=int)
     total = request.args.get("total", 0, type=int)
 
-    db["score"] = score
-    db["total"] = total
+    session["score"] = score
+    session["total"] = total
 
-    feedback_data = feedback_chat(score, db["topic"], db["level"])
+    feedback_data = feedback_chat(score, session["topic"], session["level"])
 
-    # Convert markdown → HTML
     feedback_html = Markup(markdown.markdown(
         feedback_data["feedback"],
         extensions=["fenced_code", "tables"]
     ))
+
+    # Clear quiz-related session data so a retry starts fresh
+    session.pop("score", None)
+    session.pop("total", None)
+    session.pop("quiz_data", None)
+    session.pop("current_index", None)
 
     return render_template(
         "feedback.html",
@@ -112,6 +121,13 @@ def feedback():
         resources=feedback_data.get("resources", [])
     )
 
+@app.route("/reset")
+def reset():
+    session.clear()   # clear everything from this user's session
+    return redirect(url_for("index"))
+
+
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=5000, debug=True)
+
