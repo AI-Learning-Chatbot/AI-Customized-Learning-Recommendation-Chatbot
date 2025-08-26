@@ -54,7 +54,7 @@ body {
   align-items: center;
   background: linear-gradient(180deg, #fff, #f7f0ff);
   border-radius: 25px;
-  padding: 15px 20px;
+  padding: 10px 15px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
@@ -70,6 +70,15 @@ body {
   border: none;
   outline: none;
   color: #333;
+  font-size: 1em;
+  padding: 0 10px;
+}
+.input{
+  flex-grow: 1;
+  background: none;
+  border: none;
+  outline: none;
+  color: #b0a8a8;
   font-size: 1em;
   padding: 0 10px;
 }
@@ -136,7 +145,7 @@ body {
 
 .hero {
   text-align: center;
-  margin-bottom: 40px;
+  margin-bottom: 30px;
 }
 
 .welcome-msg {
@@ -144,15 +153,18 @@ body {
   font-weight: bold;
   line-height: 1.2;
   color: #333;
+  margin-top: -50px;
 }
 
 .suggestion {
   text-align: center;
+  
 }
 
 .suggestion-title {
   font-size: 1.2rem;
   color: #999999;
+  margin-top: 20px;
   margin-bottom: 20px;
 }
 
@@ -166,17 +178,36 @@ body {
 }
 
 .topic-card {
-  background-color: rgba(187, 130, 237, 0.8039215686);
-  min-width: 100px;
-  max-width: 200px;
-  padding: 20px;
-  border-radius: 8px;
+  margin-bottom: 20px;
+  background-color: rgba(196, 141, 244, 0.804);
+  min-width: 150px;
+  max-width: 250px;
+  padding: 30px, 20px;
+  border-radius: 12px;
   text-align: center;
   font-weight: bold;
+  font-size: 1.1em;    
+  display: flex;
+  flex-direction: column; 
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   transition: transform 0.2s, box-shadow 0.2s;
   cursor: pointer;
 }
+
+.topic-card .icon {
+  font-size: 1.5em;     
+  margin-top: 10px;   
+}
+
+.topic-card .label {
+  font-size: 1em;   
+  margin-top: 5px;   
+  margin-bottom: 10px;/
+}
+
 
 .topic-card:hover {
   transform: translateY(-5px);
@@ -344,6 +375,11 @@ body {
 .quiz-btn:hover,
 .chat-btn:hover {
   color: #5750d6;
+}
+
+.disabled{
+  opacity: 0;
+  cursor: not-allowed;
 }
 
 .quiz-box {
