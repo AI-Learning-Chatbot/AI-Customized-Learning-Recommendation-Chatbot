@@ -5,6 +5,9 @@
 {% endblock %}
 
 {% block main %}
+<!-- Spinner -->
+<div id="loading-spinner" class="spinner hidden"></div>
+
 <section class="hero">
     <h2 class="welcome-msg">DakshaAI -
         <br>Get personalized quizzes, smart explanations, and <br>AI-powered guidance to <br>master any topic at your own pace.
@@ -49,34 +52,42 @@
             <span class="icon">➗<br></span>
             <span class="label">Algebra</span>
         </div>
-
     </div>
 </section>
-
-
 {% endblock %}
 
 {% block scripts %}
 <script>
+const spinner = document.getElementById("loading-spinner");
+
+// Show spinner on form submit
+document.querySelector(".input-form").addEventListener("submit", () => {
+    spinner.classList.remove("hidden");
+});
+
+// Handle topic card interactions
 document.querySelectorAll(".topic-card").forEach(card => {
     card.addEventListener("mouseenter", () => {
         card.style.backgroundColor = "lightgray";
         card.style.color = "black";
         card.style.cursor = "pointer";
     });
+
     card.addEventListener("mouseleave", () => {
         card.style.backgroundColor = "";
         card.style.color = "";
     });
 
     card.addEventListener("click", () => {
+        spinner.classList.remove("hidden"); // Show spinner
+
         const topic = card.querySelector(".label").textContent.trim();
         fetch("{{ url_for('select_topic') }}", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({ topic})
+            body: JSON.stringify({ topic })
         })
         .then(res => res.json())
         .then(data => {
@@ -84,11 +95,19 @@ document.querySelectorAll(".topic-card").forEach(card => {
                 window.location.href = data.redirect;
             } else {
                 console.error("No redirect in response:", data);
+                spinner.classList.add("hidden");
             }
         })
-        .catch(err => console.error("Fetch error:", err));
+        .catch(err => {
+            console.error("Fetch error:", err);
+            spinner.classList.add("hidden");
+        });
     });
+});
+
+// Hide spinner on page load
+window.addEventListener("load", () => {
+    spinner.classList.add("hidden");
 });
 </script>
 {% endblock %}
-
