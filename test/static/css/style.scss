@@ -25,6 +25,7 @@ body {
     color: $text-color;
     font-family: $font-main;
     display: flex;
+    width: 100%;
     min-height: 100vh;
     justify-content: center;
 }
@@ -186,7 +187,7 @@ body {
     background-color: $primary-color ;
     min-width: 20ch;
     max-width: 200px;
-    padding: 20px;
+    padding: 10px;
     border-radius: 8px;
     text-align: center;
     font-weight: bold;
