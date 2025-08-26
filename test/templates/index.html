@@ -68,12 +68,13 @@ document.querySelectorAll(".topic-card").forEach(card => {
     });
 
     card.addEventListener("click", () => {
+        const topic = card.querySelector(".label").textContent.trim();
         fetch("{{ url_for('select_topic') }}", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({ topic: card.textContent.trim() })
+            body: JSON.stringify({ topic})
         })
         .then(res => res.json())
         .then(data => {
