@@ -1,3 +1,5 @@
+
+
 *{
     margin: 0;
     padding: 0;
@@ -23,7 +25,6 @@ body{
 
 .header{
     display: flex;
-    padding: 10px 0;
     margin-left: 10px;
     margin-bottom: 20px;
     align-self: flex-start;
@@ -33,15 +34,12 @@ body{
 }
 
 .logo-container{
-    background-color: plum;
-    border-radius: 5px;
-    padding: 5px 10px;
     margin-right: 10px;
 
 }
 
 .logo {
-    height: 40px;   
+    height: 150px;   
     width: auto;    
     display: block;
 }
@@ -100,7 +98,7 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 10%;
+    margin-top: 18%;
     flex-direction: column;
     padding: 20px;
 }

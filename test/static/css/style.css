@@ -23,7 +23,6 @@ body {
 
 .header {
   display: flex;
-  padding: 10px 0;
   margin-left: 10px;
   margin-bottom: 20px;
   align-self: flex-start;
@@ -33,14 +32,11 @@ body {
 }
 
 .logo-container {
-  background-color: plum;
-  border-radius: 5px;
-  padding: 5px 10px;
   margin-right: 10px;
 }
 
 .logo {
-  height: 40px;
+  height: 150px;
   width: auto;
   display: block;
 }
@@ -466,3 +462,27 @@ body {
   border-radius: 8px;
   margin-top: 10px;
 }/*# sourceMappingURL=style.css.map */
+
+.spinner {
+  border: 6px solid #f3f3f3;
+  border-top: 6px solid #b174e7; 
+  border-radius: 20%;
+  width: 25px;
+  height: 25px;
+  animation: spin 1s linear infinite;
+  margin: 20px auto;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 200;
+}
+
+@keyframes spin {
+  0% { transform: translate(-50%, -50%) rotate(0deg); }
+  100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+.hidden {
+  display: none;
+}
