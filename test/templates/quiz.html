@@ -7,14 +7,14 @@
 {% block main %}
 <div id="loading-spinner" class="spinner hidden"></div>
 <div class="quiz-box" id="quiz-box">
-    <p class="question" id="question">
+    <h2 class="question" id="question">
         {{ quiz[index].question }}
-    </p>
+    </h2>
 
     <div class="option" id="options">
         {% for opt in quiz[index].options %}
         <label class="quiz-option">
-            <input type="radio" name="answer" value="{{ opt }}" />
+            <input type="radio" name="answer" value="{{ opt }}"/>
             <span class="custom-radio"></span>
             {{ opt }}
         </label>
@@ -36,73 +36,98 @@ let currentIndex = {{ index }};
 let score = {{ score }};
 let selectedAnswer = null;
 
-    function loadQuestion(idx) {
-        let q = quizData[idx];
-        document.getElementById("question").innerText = q.question;
+const spinner = document.getElementById("loading-spinner");
 
-        let optionsContainer = document.getElementById("options");
-        optionsContainer.innerHTML = "";
-        q.options.forEach(opt => {
-            let label = document.createElement("label");
-            label.className = "quiz-option";
-            label.innerHTML = `
+function showSpinner() {
+    spinner.classList.remove("hidden");
+}
+
+function hideSpinner() {
+    spinner.classList.add("hidden");
+}
+
+function loadQuestion(idx) {
+    let q = quizData[idx];
+    document.getElementById("question").innerText = q.question;
+
+    let optionsContainer = document.getElementById("options");
+    optionsContainer.innerHTML = "";
+    q.options.forEach(opt => {
+        let label = document.createElement("label");
+        label.className = "quiz-option";
+        label.innerHTML = `
             <input type="radio" name="answer" value="${opt}"/>
             <span class="custom-radio"></span>
             ${opt}
         `;
-            optionsContainer.appendChild(label);
-        });
+        optionsContainer.appendChild(label);
+    });
 
     document.getElementById("feedback").innerHTML = "";
     document.getElementById("check-btn").style.display = "inline-block";
     document.getElementById("next-btn").style.display = "none";
     document.getElementById("submit-btn").style.display = "none";
+
+    hideSpinner();
 }
 
 // Handle Check button
 document.getElementById("check-btn").addEventListener("click", () => {
-    let selected = document.querySelector("input[name='answer']:checked");
-    if (!selected) {
-        alert("Please select an answer first!");
-        return;
-    }
+    showSpinner();
 
-        let q = quizData[currentIndex];
-        let feedbackBox = document.getElementById("feedback");
-
-        if (selected.value === q.answer) {
-            score++;
-            feedbackBox.innerHTML = `<div style="background:green; color:white; padding:10px; border-radius:8px;">
-            ✅ Correct! ${q.explanation}
-        </div>`;
-        } else {
-            feedbackBox.innerHTML = `<div style="background:red; color:white; padding:10px; border-radius:8px;">
-            ❌ Incorrect! ${q.explanation}
-        </div>`;
+    setTimeout(() => {
+        let selected = document.querySelector("input[name='answer']:checked");
+        if (!selected) {
+            alert("Please select an answer first!");
+            hideSpinner();
+            return;
         }
 
-        document.getElementById("check-btn").style.display = "none";
+    let q = quizData[currentIndex];
+    let feedbackBox = document.getElementById("feedback");
+
+    if (selected.value === q.answer) {
+        score++;
+        feedbackBox.innerHTML = `<div style="background:rgba(79, 207, 83, 0.757); color:white; padding:10px; border-radius:8px;">
+         Correct! ${q.explanation}
+        </div>`;
+    } else {
+        feedbackBox.innerHTML = `<div style="background:rgba(233, 40, 60, 0.769); color:white; padding:10px; border-radius:8px;">
+         Incorrect! ${q.explanation}
+        </div>`;
+    }
+
+    document.getElementById("check-btn").style.display = "none";
 
     if (currentIndex < quizData.length - 1) {
         document.getElementById("next-btn").style.display = "inline-block";
     } else {
         document.getElementById("submit-btn").style.display = "inline-block";
     }
+    hideSpinner();
+    }, 500);
 });
+
 
 // Handle Next button
 document.getElementById("next-btn").addEventListener("click", () => {
-    currentIndex++;
-    loadQuestion(currentIndex);
+    showSpinner();
+    setTimeout(() => {
+        currentIndex++;
+        loadQuestion(currentIndex);
+    }, 500);
 });
 
 // Handle Final Submit button
 document.getElementById("submit-btn").addEventListener("click", () => {
-    // Redirect to feedback page with score
-    window.location.href = "{{ url_for('feedback') }}?score=" + score + "&total=" + quizData.length;
+    showSpinner();
+    setTimeout(() => {
+        window.location.href = "{{ url_for('feedback') }}?score=" + score + "&total=" + quizData.length;
+    }, 300); 
 });
 
-// Initial load
+
+
 loadQuestion(currentIndex);
 </script>
 {% endblock %}

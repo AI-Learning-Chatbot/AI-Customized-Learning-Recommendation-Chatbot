@@ -32,8 +32,15 @@ body {
   position: fixed;
 }
 
+.logo-container {
+  background-color: plum;
+  border-radius: 5px;
+  padding: 5px 10px;
+  margin-right: 10px;
+}
+
 .logo {
-  height: 80px;
+  height: 40px;
   width: auto;
   display: block;
 }
@@ -96,7 +103,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 10%;
+  margin-top: 18%;
   flex-direction: column;
   padding: 20px;
 }
@@ -128,7 +135,7 @@ body {
 }
 
 .user-response {
-  background-color: rgba(187, 130, 237, 0.8039215686);
+  background-color: rgba(158, 118, 193, 0.8039215686);
   color: #fff;
   align-self: flex-end;
   border-top-right-radius: 5px;
@@ -166,7 +173,7 @@ body {
 }
 
 .topic-card {
-  background-color: rgba(187, 130, 237, 0.8039215686);
+  background-color: rgba(158, 118, 193, 0.8039215686);
   min-width: 100px;
   max-width: 200px;
   padding: 20px;
@@ -184,7 +191,7 @@ body {
 }
 
 .score-box {
-  background-color: rgba(219.25, 245.25, 220.0625, 0.757);
+  background-color: rgb(154.5579710145, 230.9420289855, 172);
   color: #333;
   padding: 15px 20px;
   border-radius: 8px;
@@ -197,10 +204,10 @@ body {
   max-width: 600px;
 }
 .score-box.low {
-  background-color: rgba(232, 111, 58, 0.679);
+  background-color: rgba(220, 53, 69, 0.7);
 }
 .score-box.high {
-  background-color: rgba(108, 220, 93, 0.7);
+  background-color: rgba(40, 167, 69, 0.7);
 }
 
 .feedback-box {
@@ -237,7 +244,7 @@ body {
 }
 
 .feedback-box li a {
-  color: rgba(187, 130, 237, 0.8039215686);
+  color: rgba(158, 118, 193, 0.8039215686);
   -webkit-text-decoration: None;
           text-decoration: None;
   transition: 0.3s ease;
@@ -301,7 +308,7 @@ body {
 }
 
 .level-btn {
-  background: rgba(187, 130, 237, 0.8039215686);
+  background: rgba(158, 118, 193, 0.8039215686);
   border: none;
   color: #333;
   padding: 15px;
@@ -334,7 +341,7 @@ body {
 .chat-btn {
   background: none;
   border: none;
-  color: rgba(187, 130, 237, 0.8039215686);
+  color: rgba(158, 118, 193, 0.8039215686);
   font-size: 1.1em;
   font-weight: bold;
   cursor: pointer;
@@ -393,7 +400,7 @@ body {
 }
 
 .check-btn {
-  background-color: rgba(187, 130, 237, 0.8039215686);
+  background-color: rgba(158, 118, 193, 0.8039215686);
   color: white;
 }
 
@@ -402,7 +409,7 @@ body {
 }
 
 .next-btn {
-  background-color: rgba(187, 130, 237, 0.8039215686);
+  background-color: rgba(158, 118, 193, 0.8039215686);
   color: white;
 }
 
@@ -411,7 +418,7 @@ body {
 }
 
 .submit-btn {
-  background-color: rgba(187, 130, 237, 0.8039215686);
+  background-color: rgba(158, 118, 193, 0.8039215686);
   color: white;
 }
 
@@ -428,7 +435,7 @@ body {
 .custom-radio {
   height: 18px;
   width: 18px;
-  border: 2px solid rgba(187, 130, 237, 0.8039215686);
+  border: 2px solid rgba(158, 118, 193, 0.8039215686);
   border-radius: 50%;
   display: inline-block;
   position: relative;
@@ -436,7 +443,7 @@ body {
 }
 
 .quiz-option input[type=radio]:checked + .custom-radio {
-  background-color: rgba(187, 130, 237, 0.8039215686);
+  background-color: rgba(158, 118, 193, 0.8039215686);
 }
 
 .quiz-option {
@@ -449,7 +456,7 @@ body {
 }
 
 .correct {
-  background: rgba(79, 207, 83, 0.757);
+  background: #28a745;
   color: white;
   padding: 10px;
   border-radius: 8px;
@@ -457,7 +464,7 @@ body {
 }
 
 .incorrect {
-  background: rgba(233, 40, 60, 0.769);
+  background: #dc3545;
   color: white;
   padding: 10px;
   border-radius: 8px;
@@ -465,8 +472,8 @@ body {
 }
 
 .spinner {
-  border: 6px solid #a39898;
-  border-top: 6px solid #ac74dc;
+  border: 6px solid #f3f3f3;
+  border-top: 6px solid #b174e7;
   border-radius: 20%;
   width: 25px;
   height: 25px;

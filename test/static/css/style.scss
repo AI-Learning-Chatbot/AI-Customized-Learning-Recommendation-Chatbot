@@ -1,4 +1,18 @@
-*{
+$primary-color: #bb82edcd; // main button, highlights
+$hover-color: #5750d6; // hover for buttons
+$light-bg: linear-gradient(180deg, #fff, #f7f0ff); // body background
+$font-main: 'Segoe UI', sans-serif;
+$font-alt: 'Comic Neue', cursive;
+$text-color: #333; // main text color
+$secondary-bg: #f0e6fa; // cards, input background
+$border-radius: 8px;
+$shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+$success-color: rgba(79, 207, 83, 0.757);
+$error-color: rgba(233, 40, 60, 0.769);
+$score-low: rgba(232, 111, 58, 0.679);
+$score-high: rgba(108, 220, 93, 0.7);
+
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -32,17 +46,10 @@ body {
     position: fixed;
 }
 
-.logo-container{
-    background-color: plum;
-    border-radius: 5px;
-    padding: 5px 10px;
-    margin-right: 10px;
-
-}
 
 .logo {
-    height: 40px;   
-    width: auto;    
+    height: 80px;
+    width: auto;
     display: block;
 }
 
@@ -101,7 +108,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 18%;
+    margin-top: 10%;
     flex-direction: column;
     padding: 20px;
 }
@@ -479,4 +486,33 @@ body {
     padding: 10px;
     border-radius: 8px;
     margin-top: 10px;
+}
+
+.spinner {
+    border: 6px solid #a39898;
+    border-top: 6px solid #ac74dc;
+    border-radius: 20%;
+    width: 25px;
+    height: 25px;
+    animation: spin 1s linear infinite;
+    margin: 20px auto;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 200;
+}
+
+@keyframes spin {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+.hidden {
+    display: none;
 }
