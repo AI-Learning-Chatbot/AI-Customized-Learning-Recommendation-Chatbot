@@ -6,7 +6,7 @@
 
 {% block main %}
 <div class="level-box">
-    <h2 class="level-title">Select your level of understanding of<br> {{ topic }}:</h2>
+    <h2 class="level-title">How well do you<br/>understand this {{ topic }}:</h2>
     <div class="level">
         <button class="level-btn">Beginner</button>
         <button class="level-btn">Intermediate</button>
@@ -23,29 +23,6 @@
 {% block scripts %}
 <script>
 let selectedLevel = null;
-const quizBtn = document.querySelector(".quiz-btn");
-const chatBtn = document.querySelector(".chat-btn");
-
-// Exclusive selection for level buttons
-document.querySelectorAll(".level-btn").forEach(btn => {
-    btn.addEventListener("click", () => {
-        // remove .selected from all
-        document.querySelectorAll(".level-btn").forEach(b => b.classList.remove("selected"));
-        // add to clicked
-        btn.classList.add("selected");
-        selectedLevel = btn.textContent.trim();
-        //enable buttons
-        quizBtn.disabled = false;
-        chatBtn.disabled = false;
-        quizBtn.classList.remove("disabled-btn");
-        chatBtn.classList.remove("disabled-btn");
-    });
-});
-
-
-let selectedLevel = null;
-const quizBtn = document.querySelector(".quiz-btn");
-const chatBtn = document.querySelector(".chat-btn");
 
 // Exclusive selection for level buttons
 document.querySelectorAll(".level-btn").forEach(btn => {
@@ -63,8 +40,11 @@ document.querySelectorAll(".level-btn").forEach(btn => {
 });
 
 // Quiz button click
-quizBtn.addEventListener("click", () => {
-    if (!selectedLevel) return;
+document.querySelector(".quiz-btn").addEventListener("click", () => {
+    if (!selectedLevel) {
+        alert("Please select a level first!");
+        return;
+    }
     fetch("{{ url_for('set_level') }}", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -77,8 +57,11 @@ quizBtn.addEventListener("click", () => {
 });
 
 // Chat button click
-chatBtn.addEventListener("click", () => {
-    if (!selectedLevel) return;
+document.querySelector(".chat-btn").addEventListener("click", () => {
+    if (!selectedLevel) {
+        alert("Please select a level first!");
+        return;
+    }
     fetch("{{ url_for('set_level') }}", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
