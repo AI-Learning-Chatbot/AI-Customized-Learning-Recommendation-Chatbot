@@ -22,54 +22,61 @@
 
 {% block scripts %}
 <script>
-let selectedLevel = null;
+document.addEventListener("DOMContentLoaded", () => {
+    let selectedLevel = null;
+    const quizBtn = document.querySelector(".quiz-btn");
+    const chatBtn = document.querySelector(".chat-btn");
+    const levelButtons = document.querySelectorAll(".level-btn");
 
-// Exclusive selection for level buttons
-document.querySelectorAll(".level-btn").forEach(btn => {
-    btn.addEventListener("click", () => {
-        // remove .selected from all
-        document.querySelectorAll(".level-btn").forEach(b => b.classList.remove("selected"));
-        // add to clicked
-        btn.classList.add("selected");
-        selectedLevel = btn.textContent.trim();
+    // Initially disable buttons
+    quizBtn.disabled = true;
+    chatBtn.disabled = true;
+    quizBtn.classList.add("disabled-btn");
+    chatBtn.classList.add("disabled-btn");
 
-        // ✅ Show quiz & chat buttons once a level is chosen
-        document.querySelector(".quiz-btn").style.display = "inline-block";
-        document.querySelector(".chat-btn").style.display = "inline-block";
+    // Handle level selection
+    levelButtons.forEach(btn => {
+        btn.addEventListener("click", () => {
+            // Remove .selected from all
+            levelButtons.forEach(b => b.classList.remove("selected"));
+            // Add to clicked
+            btn.classList.add("selected");
+            selectedLevel = btn.textContent.trim();
+
+            // Enable buttons
+            quizBtn.disabled = false;
+            chatBtn.disabled = false;
+            quizBtn.classList.remove("disabled-btn");
+            chatBtn.classList.remove("disabled-btn");
+        });
     });
-});
 
-// Quiz button click
-document.querySelector(".quiz-btn").addEventListener("click", () => {
-    if (!selectedLevel) {
-        alert("Please select a level first!");
-        return;
-    }
-    fetch("{{ url_for('set_level') }}", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ level: selectedLevel, target: "quiz" })
-    })
-    .then(res => res.json())
-    .then(data => {
-        if (data.redirect) window.location.href = data.redirect;
+    // Quiz button click
+    quizBtn.addEventListener("click", () => {
+        if (!selectedLevel) return;
+        fetch("{{ url_for('set_level') }}", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ level: selectedLevel, target: "quiz" })
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.redirect) window.location.href = data.redirect;
+        });
     });
-});
 
-// Chat button click
-document.querySelector(".chat-btn").addEventListener("click", () => {
-    if (!selectedLevel) {
-        alert("Please select a level first!");
-        return;
-    }
-    fetch("{{ url_for('set_level') }}", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ level: selectedLevel, target: "chat" })
-    })
-    .then(res => res.json())
-    .then(data => {
-        if (data.redirect) window.location.href = data.redirect;
+    // Chat button click
+    chatBtn.addEventListener("click", () => {
+        if (!selectedLevel) return;
+        fetch("{{ url_for('set_level') }}", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ level: selectedLevel, target: "chat" })
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.redirect) window.location.href = data.redirect;
+        });
     });
 });
 </script>
