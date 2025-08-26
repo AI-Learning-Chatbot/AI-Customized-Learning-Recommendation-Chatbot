@@ -37,7 +37,9 @@ def select_topic():
 
 @app.route("/level", methods=["GET", "POST"])
 def level():
-    return render_template("level.html")
+    topic = session.get("topic", "this topic")  # fallback if session['topic'] not set
+    return render_template("level.html", topic=topic)
+
 
 
 @app.route("/set_level", methods=["POST"])
@@ -113,7 +115,7 @@ def feedback():
     if roadmap_list:
         roadmap_text = "\n".join(f"- {step}" for step in roadmap_list)
         roadmap_html = Markup(markdown.markdown(
-            f"### Learning Roadmap\n{roadmap_text}",
+            f"\n{roadmap_text}",
             extensions=["fenced_code", "tables"]
         ))
 

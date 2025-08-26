@@ -20,7 +20,7 @@ Rules:
 3. If the score is high, provide feedback on how the user can expand their knowledge further by suggesting a next milestone or advanced concept to explore. Add achievement/next-level emojis (e.g., 🎯🚀📈).
 4. Provide recommended resources with **only popular, widely recognized, publicly accessible URLs** (e.g., official documentation, top YouTube channels, widely used blogs/tutorials). Do NOT invent URLs. Only include links that are highly likely to be working.
 5. The `resources` field should contain **only URLs**, no descriptive text.
-6. Always provide a learning roadmap for the topic as a **list of sequential steps or milestones**, even if there is no official roadmap. Each step should be short and concise. You can format roadmap items in markdown style if you want.
+6. Always provide a learning roadmap for the topic as a **list of sequential steps or milestones**, even if there is no official roadmap. Each step should be short and concise. You can format roadmap items in markdown style if you want but donot inculde index.
 7. Output ONLY a JSON object matching the QuizFeedback Pydantic model, including `feedback`, `resources`, and `roadmap`.
 8. Do not add any extra text outside the JSON.
 """)

@@ -6,15 +6,16 @@
 
 {% block main %}
 <div class="level-box">
-    <h2 class="level-title">How well do you<br/>understand this topic:</h2>
+    <h2 class="level-title">Select your level of understanding of<br> {{ topic }}:</h2>
     <div class="level">
         <button class="level-btn">Beginner</button>
         <button class="level-btn">Intermediate</button>
         <button class="level-btn">Advanced</button>
     </div>
     <nav class="proceed-nav">
-        <button class="quiz-btn">Take Quiz</button> 
-        <button class="chat-btn">Chat</button> 
+        <!-- Hidden initially -->
+        <button class="quiz-btn" style="display:none;">Take Quiz</button> 
+        <button class="chat-btn" style="display:none;">Chat</button> 
     </nav>
 </div>
 {% endblock %}
@@ -31,6 +32,10 @@ document.querySelectorAll(".level-btn").forEach(btn => {
         // add to clicked
         btn.classList.add("selected");
         selectedLevel = btn.textContent.trim();
+
+        // ✅ Show quiz & chat buttons once a level is chosen
+        document.querySelector(".quiz-btn").style.display = "inline-block";
+        document.querySelector(".chat-btn").style.display = "inline-block";
     });
 });
 
@@ -69,4 +74,3 @@ document.querySelector(".chat-btn").addEventListener("click", () => {
 });
 </script>
 {% endblock %}
-

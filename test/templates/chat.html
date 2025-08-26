@@ -16,13 +16,15 @@
 {% endblock %}
 
 {% block footer %}
-<div class="input-wrapper">
-    <form class="input-form" action="{{ url_for('chat') }}" method="POST">
-        <input type="text" class="input-field" name="input-field" id="input-field" placeholder="Ask Anything"/>
-        <button class="input-btn">
-            <span class="input-btn-icon">➡️</span>
-        </button>
-    </form>
+<div class="input-container chat-input-containeer">
+    <div class="input-wrapper">
+        <form class="input-form" action="{{ url_for('chat') }}" method="POST">
+            <input type="text" class="input-field" name="input-field" id="input-field" placeholder="Ask Anything"/>
+            <button class="input-btn">
+                <span class="input-btn-icon">➪</span>
+            </button>
+        </form>
+    </div>
 </div>
 {% endblock %}
 

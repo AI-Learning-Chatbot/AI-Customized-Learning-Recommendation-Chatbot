@@ -1,7 +1,9 @@
+
 $primary-color: #bb82edcd; // main button, highlights
 $hover-color: #5750d6; // hover for buttons
 $light-bg: linear-gradient(180deg, #fff, #f7f0ff); // body background
-$font-main: 'Segoe UI', sans-serif;
+$font-head:"Poppins", sans-serif;
+$font-main: "Poppins", sans-serif;
 $font-alt: 'Comic Neue', cursive;
 $text-color: #333; // main text color
 $secondary-bg: #f0e6fa; // cards, input background
@@ -39,16 +41,14 @@ body {
     display: flex;
     padding: 10px 0;
     margin-left: 10px;
-    margin-bottom: 20px;
     align-self: flex-start;
     width: 100%;
     align-items: center;
-    position: fixed;
 }
 
 
 .logo {
-    height: 80px;
+    height: 60px;
     width: auto;
     display: block;
 }
@@ -60,6 +60,9 @@ body {
     padding: 20px 0;
     display: flex;
     justify-content: center;
+}
+
+.chat-input-containeer{
     position: sticky;
     bottom: 0;
 }
@@ -108,9 +111,8 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 10%;
     flex-direction: column;
-    padding: 20px;
+    padding: 10px;
 }
 
 .chat-container {
@@ -148,13 +150,11 @@ body {
 
 // for index page
 
-.hero {
-    text-align: center;
-    margin-bottom: 40px;
-}
-
 .welcome-msg {
-    font-size: 2em;
+    font-family: cursive;
+    margin-bottom: 30px;
+    text-align: center;
+    font-size: 1.5em;
     font-weight: bold;
     line-height: 1.2;
     color: $text-color;
@@ -162,6 +162,7 @@ body {
 
 .suggestion {
     text-align: center;
+    margin-top: 30px;
 
 }
 
@@ -173,7 +174,7 @@ body {
 
 .topics {
     display: flex;
-    max-width: 600px;
+    max-width: 800px;
     flex-wrap: wrap;
     gap: 15px;
     justify-content: center;
@@ -183,7 +184,7 @@ body {
 
 .topic-card {
     background-color: $primary-color ;
-    min-width: 100px;
+    min-width: 20ch;
     max-width: 200px;
     padding: 20px;
     border-radius: 8px;
@@ -304,13 +305,13 @@ body {
     border-radius: 10px;
     margin-bottom: 20px;
     width: 100%;
-    max-width: 400px;
+    max-width: 550px;
 }
 
 .level-title {
-    font-size: 2em;
+    font-size: 1.5em;
     margin-top: 0;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
     color: $text-color;
     line-height: 1.2;
     font-weight: bold;
@@ -319,8 +320,9 @@ body {
 .level {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 20px;
     width: 100%;
+    max-width: 300px;
 }
 
 .level-btn {
@@ -355,6 +357,7 @@ body {
 
 .quiz-btn,
 .chat-btn {
+    margin-top: 20px;
     background: none;
     border: none;
     color: $primary-color;
@@ -452,12 +455,19 @@ body {
 .custom-radio {
     height: 18px;
     width: 18px;
+    min-width: 18px;
+    /* ✅ Prevent shrinking */
+    min-height: 18px;
+    /* ✅ Prevent stretching */
     border: 2px solid $primary-color;
     border-radius: 50%;
     display: inline-block;
+    flex-shrink: 0;
+    /* ✅ Prevent flexbox from resizing it */
     position: relative;
     transition: 0.2s;
 }
+
 
 .quiz-option input[type="radio"]:checked+.custom-radio {
     background-color: $primary-color;
