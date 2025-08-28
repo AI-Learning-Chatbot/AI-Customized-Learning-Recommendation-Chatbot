@@ -85,29 +85,12 @@ def chat():
 def quiz():
     if "quiz_data" not in session:
         # Generate quiz only once per user
-        raw_quiz = quiz_generator_chat(session["topic"], session["level"])
-
-        # Convert all fields to HTML with Markdown support
-        quiz_data = []
-        for q in raw_quiz:
-            quiz_data.append({
-                "question": Markup(markdown.markdown(q["question"])),
-                "options": [Markup(markdown.markdown(opt)) for opt in q["options"]],
-                "answer": q["answer"],  # keep raw answer to compare
-                "explanation": Markup(markdown.markdown(q["explanation"]))
-            })
-
-        session["quiz_data"] = quiz_data
+        session["quiz_data"] = quiz_generator_chat(session["topic"], session["level"])
         session["current_index"] = 0
         session["score"] = 0
         session.modified = True
 
-    return render_template(
-        "quiz.html",
-        quiz=session["quiz_data"],
-        index=session["current_index"],
-        score=session["score"]
-    )
+    return render_template("quiz.html", quiz=session["quiz_data"], index=session["current_index"], score=session["score"])
 
 @app.route("/feedback")
 def feedback():
