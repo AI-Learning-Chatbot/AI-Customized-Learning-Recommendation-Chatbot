@@ -15,7 +15,7 @@ The chatbot leverages Large Language Models (LLMs) to dynamically generate conte
 ## 💻 Technology Stack
 - Frontend: HTML, CSS, and JavaScript
 - Backend: Flask (Python)
-- LLM Framework: LangChain
+- LLM Wrapper: LangChain
 - LLM Provider: Google Gemini
 
 ## 📋 Getting Started
