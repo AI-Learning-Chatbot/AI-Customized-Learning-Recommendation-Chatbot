@@ -1,9 +1,5 @@
 # AI Customized Learning Recommendation Chatbot
 
-## 🚧 Work in Progress 🚧
-
-This project is actively being developed for the **Kathmandu University AI Education Innovation Bootcamp & Hackathon X Chunjae Education**. Please note that features are still being implemented and may be subject to change.
-
 ## 🚀 Project Overview
 Welcome to our project, developed as part of the Kathmandu University AI Education Innovation Bootcamp & Hackathon X Chunjae Education!
 
